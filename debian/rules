@@ -1,0 +1,16 @@
+#!/usr/bin/make -f
+
+export DH_VERBOSE=1
+
+%:
+	dh $@ --buildsystem=gradle
+
+
+# if building without gradle-debian-helper, use:
+#
+#override_dh_auto_build:
+#	gradle --offline --refresh-dependencies --stacktrace --no-daemon --gradle-user-home debian/gradle-user-home
+#
+#override_dh_auto_clean:
+#	dh_auto_clean
+#	rm -rf debian/gradle-user-home

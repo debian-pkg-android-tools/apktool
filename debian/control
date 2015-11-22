@@ -1,0 +1,30 @@
+Source: apktool
+Section: devel
+Priority: extra
+Maintainer: Android tools Maintainer <android-tools-devel@lists.alioth.debian.org>
+Uploaders: Reiner Herrmann <reiner@reiner-h.de>
+Build-Depends: debhelper (>= 9),
+               gradle-debian-helper,
+               antlr3,
+               jflex,
+               libantlr3-runtime-java,
+               libcommons-lang3-java,
+               libcommons-cli-java,
+               libcommons-io-java,
+               libjgit-java,
+               libguava-java,
+               libjsr305-java,
+               libyaml-snake-java,
+               libxmlunit-java,
+               libxpp3-java,
+               proguard
+Standards-Version: 3.9.6
+Homepage: https://ibotpeaches.github.io/Apktool/
+Vcs-Git: https://anonscm.debian.org/git/android-tools/apktool.git
+Vcs-Browser: https://anonscm.debian.org/cgit/android-tools/apktool.git
+
+Package: apktool
+Architecture: all
+Depends: ${misc:Depends}
+Description: TBD
+ TODO

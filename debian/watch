@@ -1,0 +1,3 @@
+version=3
+opts=filenamemangle=s/.+\/v?(\d\S*)\.tar\.gz/apktool-$1\.tar\.gz/ \
+  https://github.com/iBotPeaches/apktool/tags .*/v?(\d\S*)\.tar\.gz
