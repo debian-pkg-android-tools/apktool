@@ -2,9 +2,117 @@ Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: apktool
 Source: https://github.com/iBotPeaches/Apktool
 
-Files: *
-Copyright: TODO
+#Files: *
+#Copyright: 2014 Ryszard Wiśniewski <brut.alll@gmail.com>
+#License: Apache-2.0
+
+Files: brut.apktool/*
+       brut.j.common/*
+       brut.j.dir/*
+       brut.j.util/*
+       gradle/*
+       build.gradle
+Copyright: 2014 Ryszard Wiśniewski <brut.alll@gmail.com>
 License: Apache-2.0
+
+Files: brut.apktool/apktool-lib/src/main/java/android/content/res/XmlResourceParser.java
+       brut.apktool/apktool-lib/src/main/java/android/util/TypedValue.java
+Copyright: 2006-2007 The Android Open Source Project
+License: Apache-2.0
+
+Files: brut.apktool/apktool-lib/src/main/java/android/util/AttributeSet.java
+Copyright: 2008 Android4ME
+License: Apache-2.0
+
+Files: brut.apktool/apktool-lib/src/test/java/brut/androlib/ProviderAttributeTest.java
+       brut.apktool/apktool-lib/src/test/java/brut/androlib/SharedLibraryTest.java
+Copyright: 2014 Ryszard Wiśniewski <brut.alll@gmail.com>
+           2014 Connor Tumbleson <connor.tumbleson@gmail.com>
+License: Apache-2.0
+
+Files: brut.j.util/src/main/java/brut/util/OSDetection.java
+Copyright: 2014 Ryszard Wiśniewski <brut.alll@gmail.com>
+           2013 Connor Tumbleson <connor.tumbleson@gmail.com>
+License: Apache-2.0
+
+Files: brut.apktool.smali/*
+Copyright: 2010 Ben Gruver
+License: BSD-3-clause
+
+Files: brut.apktool.smali/*/build.gradle
+Copyright: 2012 Google Inc.
+License: BSD-3-clause
+
+Files: brut.apktool.smali/util/*
+Copyright: 2012-2015 Google Inc.
+License: BSD-3-clause
+
+Files: brut.apktool.smali/util/src/main/java/org/jf/util/AlignmentUtils.java
+       brut.apktool.smali/util/src/main/java/org/jf/util/ClassFileNameHandler.java
+       brut.apktool.smali/util/src/main/java/org/jf/util/ConsoleUtil.java
+       brut.apktool.smali/util/src/main/java/org/jf/util/Hex.java
+       brut.apktool.smali/util/src/main/java/org/jf/util/IndentingWriter.java
+       brut.apktool.smali/util/src/main/java/org/jf/util/PathUtil.java
+       brut.apktool.smali/util/src/main/java/org/jf/util/SmaliHelpFormatter.java
+       brut.apktool.smali/util/src/test/java/org/jf/util/PathUtilTest.java
+Copyright: 2010 Ben Gruver
+License: BSD-3-clause
+
+Files: brut.apktool.smali/util/src/main/java/org/jf/util/ExceptionWithContext.java
+       brut.apktool.smali/util/src/main/java/org/jf/util/Utf8Utils.java
+Copyright: 2007 The Android Open Source Project
+License: Apache-2.0
+
+Files: brut.apktool.smali/smali/src/main/java/org/jf/smali/SmaliMethodParameter.java
+      brut.apktool.smali/smali/src/main/java/org/jf/smali/SmaliTestUtils.java
+      brut.apktool.smali/smali/src/main/java/org/jf/smali/WithRegister.java
+      brut.apktool.smali/smali/src/test/java/ImplicitReferenceTest.java
+      brut.apktool.smali/dexlib2/*
+      brut.apktool.smali/baksmali/src/test/java/*
+Copyright: 2012-2015 Google Inc.
+License: BSD-3-clause
+
+Files: brut.apktool.smali/smali/src/test/antlr/org/jf/smali/expectedTokensTestGrammar.g
+Copyright: 2007-2008 Terence Parr
+           2010 Ben Gruver
+License: BSD-3-clause
+
+Files: brut.apktool.smali/smali/src/main/jflex/smaliLexer.jflex
+Copyright: ???
+
+Files: brut.apktool.smali/baksmali/src/main/*
+Copyright: 2010-2011 Ben Gruver
+License: BSD-3-clause
+
+Files: brut.apktool.smali/baksmali/src/test/java/*
+       brut.apktool.smali/baksmali/src/main/java/org/jf/baksmali/Adaptors/Debug/*
+       brut.apktool.smali/baksmali/src/main/java/org/jf/baksmali/Adaptors/CommentingIndentingWriter.java
+       brut.apktool.smali/baksmali/src/main/java/org/jf/baksmali/baksmaliOptions.java
+Copyright: 2012-2015 Google Inc.
+License: BSD-3-clause
+
+Files: scripts/linux/apktool
+       scripts/osx/apktool
+Copyright: 2007 The Android Open Source Project
+License: Apache-2.0
+
+Files: brut.apktool/apktool-lib/src/main/java/com/mindprod/ledatastream/LEDataInputStream.java
+Copyright: 1998-2010 Roedy Green, Canadian Mind Products
+License: NOMIL
+
+Files: brut.apktool/apktool-lib/src/main/java/org/xmlpull/mxp1_serializer/MXSerializer.java
+Copyright: 2002-2004 Extreme! Lab, Indiana University
+License: INDIANA
+Comment: copied from XPP (XML Pull Parser): http://www.extreme.indiana.edu/xgws/xsoap/xpp/
+
+Files: brut.apktool/apktool-lib/src/main/resources/*
+Copyright: ???
+
+Files: brut.apktool/apktool-lib/src/test/resources/*
+Copyright: ???
+
+Files: gradle/wrapper/*
+Copyright: ???
 
 Files: debian/*
 Copyright: 2015 Reiner Herrmann <reiner@reiner-h.de>
@@ -25,3 +133,62 @@ License: Apache-2.0
  .
  On Debian systems, the complete text of the Apache version 2.0 license
  can be found in "/usr/share/common-licenses/Apache-2.0".
+
+License: BSD-3-clause
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the BSD license.
+ .
+ On Debian systems, the complete text of the BSD license in
+ '/usr/share/common-licenses/BSD'.
+
+License: NOMIL
+ This software may be copied and used freely for any purpose but military.
+Comment: http://mindprod.com/contact/nonmil.html
+
+License: INDIANA
+ Indiana University Extreme! Lab Software License
+ .
+ Version 1.1.1
+ .
+ Copyright (c) 2002 Extreme! Lab, Indiana University. All rights reserved.
+ .
+ Redistribution and use in source and binary forms, with or without 
+ modification, are permitted provided that the following conditions 
+ are met:
+ .
+ 1. Redistributions of source code must retain the above copyright notice, 
+    this list of conditions and the following disclaimer.
+ .
+ 2. Redistributions in binary form must reproduce the above copyright 
+    notice, this list of conditions and the following disclaimer in 
+    the documentation and/or other materials provided with the distribution.
+ .
+ 3. The end-user documentation included with the redistribution, if any, 
+    must include the following acknowledgment:
+ .
+   "This product includes software developed by the Indiana University 
+   Extreme! Lab (http://www.extreme.indiana.edu/)."
+ .
+ Alternately, this acknowledgment may appear in the software itself, 
+ if and wherever such third-party acknowledgments normally appear.
+ .
+ 4. The names "Indiana Univeristy" and "Indiana Univeristy Extreme! Lab" 
+ must not be used to endorse or promote products derived from this 
+ software without prior written permission. For written permission, 
+ please contact http://www.extreme.indiana.edu/.
+ .
+ 5. Products derived from this software may not use "Indiana Univeristy" 
+ name nor may "Indiana Univeristy" appear in their name, without prior 
+ written permission of the Indiana University.
+ .
+ THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED
+ WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+ MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+ IN NO EVENT SHALL THE AUTHORS, COPYRIGHT HOLDERS OR ITS CONTRIBUTORS
+ BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+ BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
