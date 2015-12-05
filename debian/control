@@ -25,6 +25,6 @@ Vcs-Browser: https://anonscm.debian.org/cgit/android-tools/apktool.git
 
 Package: apktool
 Architecture: all
-Depends: ${misc:Depends}
+Depends: ${misc:Depends}, aapt
 Description: TBD
  TODO
