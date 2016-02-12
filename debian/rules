@@ -1,16 +1,16 @@
 #!/usr/bin/make -f
-
-export DH_VERBOSE=1
+export JAVA_HOME=/usr/lib/jvm/default-java
 
 %:
-	dh $@ --buildsystem=gradle
+	dh $@ --parallel --buildsystem=gradle
 
+override_dh_auto_build:
+	dh_auto_build -- -Dfile.encoding=UTF-8 assemble
 
-# if building without gradle-debian-helper, use:
-#
-#override_dh_auto_build:
-#	gradle --offline --refresh-dependencies --stacktrace --no-daemon --gradle-user-home debian/gradle-user-home
-#
-#override_dh_auto_clean:
-#	dh_auto_clean
-#	rm -rf debian/gradle-user-home
+override_dh_install:
+	mkdir -p debian/apktool/usr/share/apktool
+	find . -name "*.jar" -exec mv {} debian/apktool/usr/share/apktool/ \;
+	dh_install
+
+get-orig-source:
+	uscan --force-download --download-current-version --repack --compression xz

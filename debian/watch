@@ -1,3 +1,3 @@
 version=3
-opts=filenamemangle=s/.+\/v?(\d\S*)\.tar\.gz/apktool-$1\.tar\.gz/ \
+opts=dversionmangle=s/(\da?)[\+\.\-~](?:dfsg|debian|ds|repack|repacked)\.?\d*$/$1/,filenamemangle=s/.+\/v?(\d\S*)\.tar\.gz/apktool-$1\.tar\.gz/,repacksuffix=+dfsg \
   https://github.com/iBotPeaches/apktool/tags .*/v?(\d\S*)\.tar\.gz

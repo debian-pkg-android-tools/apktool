@@ -1,0 +1,5 @@
+# The official release builds a "fatJar" of apktool and these jar files are
+# part of the build process. Since we don't embed different libraries into
+# apktool.jar we have to deal with multiple single jar files. Some of them are
+# codeless but this is not an issue
+codeless-jar

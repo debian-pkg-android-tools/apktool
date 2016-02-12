@@ -1,5 +1,5 @@
-apktool (2.0.2-1) unstable; urgency=low
+apktool (2.0.2+dfsg-1) UNRELEASED; urgency=low
 
-  * Initial release (Closes: #nnnnnn)
+  * Initial release (Closes: #806855)
 
- -- Reiner Herrmann <reiner@reiner-h.de>  Tue, 25 Aug 2015 22:30:54 +0200
+ -- Markus Koschany <apo@debian.org>  Fri, 12 Feb 2016 20:31:52 +0100

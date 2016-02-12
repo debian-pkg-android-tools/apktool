@@ -1,30 +1,50 @@
 Source: apktool
 Section: devel
-Priority: extra
+Priority: optional
 Maintainer: Android tools Maintainer <android-tools-devel@lists.alioth.debian.org>
-Uploaders: Reiner Herrmann <reiner@reiner-h.de>
-Build-Depends: debhelper (>= 9),
-               gradle-debian-helper,
-               antlr3,
-               jflex,
-               libantlr3-runtime-java,
-               libcommons-lang3-java,
-               libcommons-cli-java,
-               libcommons-io-java,
-               libjgit-java,
-               libguava-java,
-               libjsr305-java,
-               libyaml-snake-java,
-               libxmlunit-java,
-               libxpp3-java,
-               proguard
-Standards-Version: 3.9.6
+Uploaders:
+ Markus Koschany <apo@debian.org>
+Build-Depends:
+ antlr3,
+ debhelper (>= 9),
+ default-jdk,
+ gradle-debian-helper,
+ jflex,
+ libantlr3-runtime-java,
+ libstringtemplate-java,
+ libcommons-cli-java,
+ libcommons-io-java,
+ libcommons-lang3-java,
+ libguava-java,
+ libjgit-java,
+ libjsr305-java,
+ libxmlunit-java,
+ libxpp3-java,
+ libyaml-snake-java,
+ libgradle-jflex-plugin-java,
+ proguard,
+ junit4
+Standards-Version: 3.9.7
 Homepage: https://ibotpeaches.github.io/Apktool/
 Vcs-Git: https://anonscm.debian.org/git/android-tools/apktool.git
 Vcs-Browser: https://anonscm.debian.org/cgit/android-tools/apktool.git
 
 Package: apktool
 Architecture: all
-Depends: ${misc:Depends}, aapt
-Description: TBD
- TODO
+Depends:
+ aapt,
+ libyaml-snake-java,
+ libantlr3-runtime-java,
+ libstringtemplate-java,
+ libguava-java,
+ libcommons-cli-java,
+ libcommons-io-java,
+ libjsr305-java,
+ ${misc:Depends}
+Description: tool for reverse engineering Android apk files
+ A tool for reverse engineering 3rd party, closed, binary Android apps. It can
+ decode resources to nearly original form and rebuild them after making some
+ modifications; it makes possible to debug smali code step by step. Also it
+ makes working with an app easier because of project-like file structure and
+ automation of some repetitive tasks like building apk.
+

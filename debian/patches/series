@@ -1,2 +1,3 @@
 use_system_aapt.patch
-#fix_building.patch
+build.patch
+mindprod-non-military.patch
