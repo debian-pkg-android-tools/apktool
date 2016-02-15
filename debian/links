@@ -5,4 +5,5 @@ usr/share/java/commons-io.jar usr/share/apktool/commons-io.jar
 usr/share/java/guava.jar usr/share/apktool/guava.jar
 usr/share/java/jsr305.jar usr/share/apktool/jsr305.jar
 usr/share/java/snakeyaml.jar usr/share/apktool/snakeyaml.jar
+usr/share/java/xpp3.jar usr/share/apktool/xpp3.jar
 

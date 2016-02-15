@@ -40,6 +40,7 @@ Depends:
  libcommons-cli-java,
  libcommons-io-java,
  libjsr305-java,
+ libxpp3-java,
  ${misc:Depends}
 Description: tool for reverse engineering Android apk files
  A tool for reverse engineering 3rd party, closed, binary Android apps. It can
