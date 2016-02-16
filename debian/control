@@ -39,6 +39,7 @@ Depends:
  libguava-java,
  libcommons-cli-java,
  libcommons-io-java,
+ libcommons-lang3-java,
  libjsr305-java,
  libxpp3-java,
  ${misc:Depends}
