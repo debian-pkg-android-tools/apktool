@@ -8,7 +8,7 @@ Subject: LittleEndianDataInputStream
  2 files changed, 5 insertions(+), 5 deletions(-)
 
 diff --git a/brut.apktool/apktool-lib/src/main/java/brut/androlib/res/decoder/ARSCDecoder.java b/brut.apktool/apktool-lib/src/main/java/brut/androlib/res/decoder/ARSCDecoder.java
-index bb8fbf5..3b9f12f 100644
+index bb8fbf5..5f854c2 100644
 --- a/brut.apktool/apktool-lib/src/main/java/brut/androlib/res/decoder/ARSCDecoder.java
 +++ b/brut.apktool/apktool-lib/src/main/java/brut/androlib/res/decoder/ARSCDecoder.java
 @@ -23,7 +23,7 @@ import brut.androlib.res.data.value.*;
@@ -25,12 +25,12 @@ index bb8fbf5..3b9f12f 100644
              mFlagsOffsets = null;
          }
 -        mIn = new ExtDataInput(new LEDataInputStream(arscStream));
-+        mIn = new ExtDataInput(new LittleEndianDataInputStream(arscStream));
++        mIn = new brut.util.ExtDataInput((InputStream) new LittleEndianDataInputStream(arscStream));
          mResTable = resTable;
          mKeepBroken = keepBroken;
      }
 diff --git a/brut.apktool/apktool-lib/src/main/java/brut/androlib/res/decoder/AXmlResourceParser.java b/brut.apktool/apktool-lib/src/main/java/brut/androlib/res/decoder/AXmlResourceParser.java
-index 1c768a9..3af168c 100644
+index 1c768a9..889dbc8 100644
 --- a/brut.apktool/apktool-lib/src/main/java/brut/androlib/res/decoder/AXmlResourceParser.java
 +++ b/brut.apktool/apktool-lib/src/main/java/brut/androlib/res/decoder/AXmlResourceParser.java
 @@ -20,7 +20,7 @@ import android.util.TypedValue;
@@ -47,7 +47,7 @@ index 1c768a9..3af168c 100644
          close();
          if (stream != null) {
 -            m_reader = new ExtDataInput(new LEDataInputStream(stream));
-+            m_reader = new ExtDataInput(new LittleEndianDataInputStream(stream));
++            m_reader = new ExtDataInput((InputStream) new LittleEndianDataInputStream(stream));
          }
      }
  
