@@ -9,7 +9,7 @@ Subject: LEDataInputStream.java
 
 diff --git a/brut.apktool/apktool-lib/src/main/java/com/mindprod/ledatastream/LEDataInputStream.java b/brut.apktool/apktool-lib/src/main/java/com/mindprod/ledatastream/LEDataInputStream.java
 new file mode 100644
-index 0000000..293cb1d
+index 0000000..9418e64
 --- /dev/null
 +++ b/brut.apktool/apktool-lib/src/main/java/com/mindprod/ledatastream/LEDataInputStream.java
 @@ -0,0 +1,186 @@
