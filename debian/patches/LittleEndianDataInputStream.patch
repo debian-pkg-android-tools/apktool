@@ -25,7 +25,7 @@ index bb8fbf5..5f854c2 100644
              mFlagsOffsets = null;
          }
 -        mIn = new ExtDataInput(new LEDataInputStream(arscStream));
-+        mIn = new brut.util.ExtDataInput((InputStream) new LittleEndianDataInputStream(arscStream));
++        mIn = new ExtDataInput((InputStream) new LittleEndianDataInputStream(arscStream));
          mResTable = resTable;
          mKeepBroken = keepBroken;
      }
