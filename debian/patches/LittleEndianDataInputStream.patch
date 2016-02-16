@@ -1,0 +1,60 @@
+From: Markus Koschany <apo@debian.org>
+Date: Tue, 16 Feb 2016 18:43:06 +0100
+Subject: LittleEndianDataInputStream
+
+---
+ .../src/main/java/brut/androlib/res/decoder/ARSCDecoder.java        | 4 ++--
+ .../src/main/java/brut/androlib/res/decoder/AXmlResourceParser.java | 6 +++---
+ 2 files changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/brut.apktool/apktool-lib/src/main/java/brut/androlib/res/decoder/ARSCDecoder.java b/brut.apktool/apktool-lib/src/main/java/brut/androlib/res/decoder/ARSCDecoder.java
+index bb8fbf5..3b9f12f 100644
+--- a/brut.apktool/apktool-lib/src/main/java/brut/androlib/res/decoder/ARSCDecoder.java
++++ b/brut.apktool/apktool-lib/src/main/java/brut/androlib/res/decoder/ARSCDecoder.java
+@@ -23,7 +23,7 @@ import brut.androlib.res.data.value.*;
+ import brut.util.Duo;
+ import brut.androlib.res.data.ResTable;
+ import brut.util.ExtDataInput;
+-import com.mindprod.ledatastream.LEDataInputStream;
++import com.google.common.io.LittleEndianDataInputStream;
+ import java.io.*;
+ import java.math.BigInteger;
+ import java.util.*;
+@@ -61,7 +61,7 @@ public class ARSCDecoder {
+             mCountIn = null;
+             mFlagsOffsets = null;
+         }
+-        mIn = new ExtDataInput(new LEDataInputStream(arscStream));
++        mIn = new ExtDataInput(new LittleEndianDataInputStream(arscStream));
+         mResTable = resTable;
+         mKeepBroken = keepBroken;
+     }
+diff --git a/brut.apktool/apktool-lib/src/main/java/brut/androlib/res/decoder/AXmlResourceParser.java b/brut.apktool/apktool-lib/src/main/java/brut/androlib/res/decoder/AXmlResourceParser.java
+index 1c768a9..3af168c 100644
+--- a/brut.apktool/apktool-lib/src/main/java/brut/androlib/res/decoder/AXmlResourceParser.java
++++ b/brut.apktool/apktool-lib/src/main/java/brut/androlib/res/decoder/AXmlResourceParser.java
+@@ -20,7 +20,7 @@ import android.util.TypedValue;
+ import brut.androlib.AndrolibException;
+ import brut.androlib.res.xml.ResXmlEncoders;
+ import brut.util.ExtDataInput;
+-import com.mindprod.ledatastream.LEDataInputStream;
++import com.google.common.io.LittleEndianDataInputStream;
+ import java.io.IOException;
+ import java.io.InputStream;
+ import java.io.Reader;
+@@ -69,7 +69,7 @@ public class AXmlResourceParser implements XmlResourceParser {
+     public void open(InputStream stream) {
+         close();
+         if (stream != null) {
+-            m_reader = new ExtDataInput(new LEDataInputStream(stream));
++            m_reader = new ExtDataInput(new LittleEndianDataInputStream(stream));
+         }
+     }
+ 
+@@ -994,4 +994,4 @@ public class AXmlResourceParser implements XmlResourceParser {
+             CHUNK_XML_END_NAMESPACE = 0x00100101,
+             CHUNK_XML_START_TAG = 0x00100102, CHUNK_XML_END_TAG = 0x00100103,
+             CHUNK_XML_TEXT = 0x00100104, CHUNK_XML_LAST = 0x00100104;
+-}
+\ No newline at end of file
++}
