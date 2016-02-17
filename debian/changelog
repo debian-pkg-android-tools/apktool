@@ -1,5 +1,5 @@
-apktool (2.0.2+dfsg-1) UNRELEASED; urgency=low
+apktool (2.0.2+dfsg-1) unstable; urgency=medium
 
   * Initial release (Closes: #806855)
 
- -- Markus Koschany <apo@debian.org>  Fri, 12 Feb 2016 20:31:52 +0100
+ -- Markus Koschany <apo@debian.org>  Wed, 17 Feb 2016 17:27:21 +0100
