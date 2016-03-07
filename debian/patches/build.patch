@@ -2,7 +2,7 @@ From: Markus Koschany <apo@debian.org>
 Date: Thu, 11 Feb 2016 18:18:32 +0100
 Subject: build
 
-The original upstream distribution of apktool is packaged a so called "fatJar"
+The original upstream distribution of apktool is packaged as a so called "fatJar"
 which includes all dependencies in one jar file. The Debian approach is to use
 separate jar files which are simpler to maintain and security vulnerabilites
 can be quickly fixed once.
