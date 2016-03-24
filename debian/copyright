@@ -71,6 +71,13 @@ Files: debian/*
 Copyright: 2016, Markus Koschany <apo@debian.org>
 License: Apache-2.0
 
+Files: debian/patches/LittleEndianDataInputStream.java.patch
+Copyright: no-copyright
+License: public-domain
+ Please use it however you wish.
+Comment:
+ http://www.peterfranza.com/2008/09/26/little-endian-input-stream/#comment-2518
+
 License: Apache-2.0
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
