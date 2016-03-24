@@ -1,3 +1,14 @@
+apktool (2.0.2+dfsg-2) unstable; urgency=medium
+
+  * Update LittleEndianDataInputStream.patch.
+    Replace defunct Little Endian implementation by cherry-picking
+    upstream commit ecb46ec5e750e58c159ab557f7e21f2d27c7a6b9
+    and using the new public domain class LittleEndianDataInputStream
+    (Closes: #819191)
+  * Clarify license for new Little Endian data input stream implementation.
+
+ -- Markus Koschany <apo@debian.org>  Thu, 24 Mar 2016 20:38:32 +0100
+
 apktool (2.0.2+dfsg-1) unstable; urgency=medium
 
   * Initial release (Closes: #806855)
