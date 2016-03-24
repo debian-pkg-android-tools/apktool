@@ -2,6 +2,9 @@ From: Markus Koschany <apo@debian.org>
 Date: Thu, 24 Mar 2016 20:24:10 +0100
 Subject: LittleEndianDataInputStream.java
 
+Cherry-picked from
+https://github.com/iBotPeaches/Apktool/commit/ecb46ec5e750e58c159ab557f7e21f2d27c7a6b9
+
 ---
  .../brut/androlib/res/decoder/ARSCDecoder.java     |   4 +-
  .../androlib/res/decoder/AXmlResourceParser.java   |   6 +-
