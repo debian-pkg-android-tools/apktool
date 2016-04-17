@@ -1,3 +1,9 @@
+apktool (2.1.0+dfsg-1) UNRELEASED; urgency=medium
+
+  * 
+
+ -- Markus Koschany <apo@debian.org>  Sun, 17 Apr 2016 21:26:18 +0200
+
 apktool (2.0.2+dfsg-2) unstable; urgency=medium
 
   * Update LittleEndianDataInputStream.patch.
