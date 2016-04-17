@@ -3,7 +3,6 @@ Upstream-Name: apktool
 Source: https://github.com/iBotPeaches/Apktool
 Files-Excluded:
  brut.apktool/apktool-lib/src/main/resources/prebuilt
- brut.apktool/apktool-lib/src/main/java/com/mindprod/ledatastream/LEDataInputStream.java
  brut.apktool/apktool-lib/src/test/resources/brut/apktool/testapp/res/drawable-ldpi/data.jpg
  *.jar
 
