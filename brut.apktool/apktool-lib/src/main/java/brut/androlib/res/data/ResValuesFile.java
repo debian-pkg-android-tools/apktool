@@ -24,11 +24,11 @@ import java.util.Set;
  */
 public class ResValuesFile {
     private final ResPackage mPackage;
-    private final ResType mType;
-    private final ResConfig mConfig;
+    private final ResTypeSpec mType;
+    private final ResType mConfig;
     private final Set<ResResource> mResources = new LinkedHashSet<ResResource>();
 
-    public ResValuesFile(ResPackage pkg, ResType type, ResConfig config) {
+    public ResValuesFile(ResPackage pkg, ResTypeSpec type, ResType config) {
         this.mPackage = pkg;
         this.mType = type;
         this.mConfig = config;
@@ -44,11 +44,11 @@ public class ResValuesFile {
         return mResources;
     }
 
-    public ResType getType() {
+    public ResTypeSpec getType() {
         return mType;
     }
 
-    public ResConfig getConfig() {
+    public ResType getConfig() {
         return mConfig;
     }
 
@@ -69,12 +69,10 @@ public class ResValuesFile {
             return false;
         }
         final ResValuesFile other = (ResValuesFile) obj;
-        if (this.mType != other.mType
-                && (this.mType == null || !this.mType.equals(other.mType))) {
+        if (this.mType != other.mType && (this.mType == null || !this.mType.equals(other.mType))) {
             return false;
         }
-        if (this.mConfig != other.mConfig
-                && (this.mConfig == null || !this.mConfig.equals(other.mConfig))) {
+        if (this.mConfig != other.mConfig && (this.mConfig == null || !this.mConfig.equals(other.mConfig))) {
             return false;
         }
         return true;

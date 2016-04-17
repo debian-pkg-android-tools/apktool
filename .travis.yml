@@ -5,21 +5,23 @@ jdk:
   - openjdk7
   - oraclejdk7
   - oraclejdk8
+matrix:
+  allow_failures:
+    - jdk: openjdk7
 os:
   - linux
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
 before_install:
+  - git config --global user.email "travis@connortumbleson.com"
+  - git config --global user.name "Travis CI Bot"
   - sudo apt-get update -qq
   - sudo apt-get install -qq libstdc++6:i386 lib32z1 expect
-script: ./scripts/travis-ci/run-tests.sh
+  - git submodule update --init --recursive
+script: ./gradlew build fatJar proguard
 branches:
   only:
     - master
     - stable
-notifications:
-  irc:
-    channels:
-      - "chat.freenode.net#apktool"
-    on_success: change
-    on_failure: always
-    template:
-      - "%{repository_name} (%{commit}) : %{duration} - %{message}"

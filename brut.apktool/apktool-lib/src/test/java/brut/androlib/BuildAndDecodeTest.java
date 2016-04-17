@@ -15,10 +15,13 @@
  */
 package brut.androlib;
 
+import brut.androlib.meta.MetaInfo;
 import brut.androlib.res.util.ExtFile;
 import brut.common.BrutException;
 import brut.directory.FileDirectory;
 import brut.util.OS;
+
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.Map;
 import java.util.Set;
@@ -28,6 +31,8 @@ import org.custommonkey.xmlunit.*;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.xml.sax.SAXException;
+
+import javax.imageio.ImageIO;
 
 /**
  * @author Ryszard Wiśniewski <brut.alll@gmail.com>
@@ -176,15 +181,40 @@ public class BuildAndDecodeTest {
     }
 
     @Test
+    public void xmlCustomAttributeTest() throws BrutException {
+        compareXmlFiles("res/layout/issue1063.xml");
+    }
+
+    @Test
+    public void xmlSmallNumbersDontEscapeTest() throws BrutException {
+        compareXmlFiles("res/layout/issue1130.xml");
+    }
+
+    @Test
     public void qualifiersTest() throws BrutException {
-        compareValuesFiles("values-mcc004-mnc04-en-rUS-ldrtl-sw100dp-w200dp-h300dp"
+        compareValuesFiles("values-mcc004-mnc4-en-rUS-ldrtl-sw100dp-w200dp-h300dp"
                 + "-xlarge-long-round-land-desk-night-xhdpi-finger-keyssoft-12key"
                 + "-navhidden-dpad/strings.xml");
     }
 
     @Test
     public void shortendedMncTest() throws BrutException {
-        compareValuesFiles("values-mcc001-mnc01/strings.xml");
+        compareValuesFiles("values-mcc001-mnc1/strings.xml");
+    }
+
+    @Test
+    public void shortMncHtcTest() throws BrutException {
+        compareValuesFiles("values-mnc1/strings.xml");
+    }
+
+    @Test
+    public void shortMncv2Test() throws BrutException {
+        compareValuesFiles("values-mcc238-mnc6/strings.xml");
+    }
+
+    @Test
+    public void longMncTest() throws BrutException {
+        compareValuesFiles("values-mcc238-mnc870/strings.xml");
     }
 
     @Test
@@ -284,6 +314,27 @@ public class BuildAndDecodeTest {
     }
 
     @Test
+    public void ninePatchImageColorTest() throws BrutException, IOException {
+        char slash = File.separatorChar;
+        String location = slash + "res" + slash + "drawable-xhdpi" + slash;
+
+        File control = new File((sTestOrigDir + location), "9patch.9.png");
+        File test =  new File((sTestNewDir + location), "9patch.9.png");
+
+        BufferedImage controlImage = ImageIO.read(control);
+        BufferedImage testImage = ImageIO.read(test);
+
+        // lets start with 0,0 - empty
+        assertEquals(controlImage.getRGB(0, 0), testImage.getRGB(0, 0));
+
+        // then with 30, 0 - black
+        assertEquals(controlImage.getRGB(30, 0), testImage.getRGB(30, 0));
+
+        // then 30, 30 - blue
+        assertEquals(controlImage.getRGB(30, 30), testImage.getRGB(30, 30));
+    }
+
+    @Test
     public void drawableXxhdpiTest() throws BrutException, IOException {
         compareResFolder("drawable-xxhdpi");
     }
@@ -325,13 +376,13 @@ public class BuildAndDecodeTest {
 
     @SuppressWarnings("unchecked")
     private void compareUnknownFiles() throws BrutException, IOException {
-        Map<String, Object> control = new Androlib().readMetaFile(sTestOrigDir);
-        Map<String, Object> test = new Androlib().readMetaFile(sTestNewDir);
-        assertTrue(control.containsKey("unknownFiles"));
-        assertTrue(test.containsKey("unknownFiles"));
+        MetaInfo control = new Androlib().readMetaFile(sTestOrigDir);
+        MetaInfo test = new Androlib().readMetaFile(sTestNewDir);
+        assertNotNull(control.unknownFiles);
+        assertNotNull(test.unknownFiles);
 
-        Map<String, String> control_files = (Map<String, String>)control.get("unknownFiles");
-        Map<String, String> test_files = (Map<String, String>)test.get("unknownFiles");
+        Map<String, String> control_files = control.unknownFiles;
+        Map<String, String> test_files = test.unknownFiles;
         assertTrue(control_files.size() == test_files.size());
 
         // Make sure that the compression methods are still the same

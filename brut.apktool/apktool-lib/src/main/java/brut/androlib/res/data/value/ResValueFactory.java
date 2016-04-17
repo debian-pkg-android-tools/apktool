@@ -27,14 +27,16 @@ import brut.util.Duo;
 public class ResValueFactory {
     private final ResPackage mPackage;
 
-    public ResValueFactory(ResPackage pakage_) {
-        this.mPackage = pakage_;
+    public ResValueFactory(ResPackage package_) {
+        this.mPackage = package_;
     }
 
-    public ResScalarValue factory(int type, int value, String rawValue)
-            throws AndrolibException {
+    public ResScalarValue factory(int type, int value, String rawValue) throws AndrolibException {
         switch (type) {
             case TypedValue.TYPE_NULL:
+                if (value == TypedValue.DATA_NULL_UNDEFINED) { // Special case $empty as explicitly defined empty value
+                    return new ResStringValue(null, value);
+                }
                 return new ResReferenceValue(mPackage, 0, null);
             case TypedValue.TYPE_REFERENCE:
                 return newReference(value, rawValue);
@@ -54,12 +56,10 @@ public class ResValueFactory {
                 return newReference(value, rawValue);
         }
 
-        if (type >= TypedValue.TYPE_FIRST_COLOR_INT
-                && type <= TypedValue.TYPE_LAST_COLOR_INT) {
+        if (type >= TypedValue.TYPE_FIRST_COLOR_INT && type <= TypedValue.TYPE_LAST_COLOR_INT) {
             return new ResColorValue(value, rawValue);
         }
-        if (type >= TypedValue.TYPE_FIRST_INT
-                && type <= TypedValue.TYPE_LAST_INT) {
+        if (type >= TypedValue.TYPE_FIRST_INT && type <= TypedValue.TYPE_LAST_INT) {
             return new ResIntValue(value, rawValue, type);
         }
 
@@ -70,11 +70,13 @@ public class ResValueFactory {
         if (value.startsWith("res/")) {
             return new ResFileValue(value, rawValue);
         }
+        if (value.startsWith("r/")) { //AndroResGuard
+            return new ResFileValue(value, rawValue);
+        }
         return new ResStringValue(value, rawValue);
     }
 
-    public ResBagValue bagFactory(int parent,
-                                  Duo<Integer, ResScalarValue>[] items) throws AndrolibException {
+    public ResBagValue bagFactory(int parent, Duo<Integer, ResScalarValue>[] items) throws AndrolibException {
         ResReferenceValue parentVal = newReference(parent, null);
 
         if (items.length == 0) {
@@ -87,8 +89,7 @@ public class ResValueFactory {
         if (key == ResArrayValue.BAG_KEY_ARRAY_START) {
             return new ResArrayValue(parentVal, items);
         }
-        if (key >= ResPluralsValue.BAG_KEY_PLURALS_START
-                && key <= ResPluralsValue.BAG_KEY_PLURALS_END) {
+        if (key >= ResPluralsValue.BAG_KEY_PLURALS_START && key <= ResPluralsValue.BAG_KEY_PLURALS_END) {
             return new ResPluralsValue(parentVal, items);
         }
         return new ResStyleValue(parentVal, items, this);
@@ -98,8 +99,7 @@ public class ResValueFactory {
         return newReference(resID, rawValue, false);
     }
 
-    public ResReferenceValue newReference(int resID, String rawValue,
-                                          boolean theme) {
+    public ResReferenceValue newReference(int resID, String rawValue, boolean theme) {
         return new ResReferenceValue(mPackage, resID, rawValue, theme);
     }
 }

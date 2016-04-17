@@ -18,6 +18,7 @@ package brut.androlib.res.data;
 
 import brut.androlib.AndrolibException;
 import brut.androlib.err.UndefinedResObject;
+import brut.androlib.meta.VersionInfo;
 import brut.androlib.res.AndrolibResources;
 import brut.androlib.res.data.value.ResValue;
 import java.util.*;
@@ -39,8 +40,8 @@ public class ResTable {
     private boolean mAnalysisMode = false;
     private boolean mSharedLibrary = false;
 
-    private Map<String, String> mSdkInfo = new LinkedHashMap<String, String>();
-    private Map<String, String> mVersionInfo = new LinkedHashMap<String, String>();
+    private Map<String, String> mSdkInfo = new LinkedHashMap<>();
+    private VersionInfo mVersionInfo = new VersionInfo();
 
     public ResTable() {
         mAndRes = null;
@@ -87,8 +88,8 @@ public class ResTable {
     public ResPackage getHighestSpecPackage() throws AndrolibException {
         int id = 0;
         int value = 0;
-        for(ResPackage resPackage : mPackagesById.values()) {
-            if(resPackage.getResSpecCount() > value && !resPackage.getName().equalsIgnoreCase("android")) {
+        for (ResPackage resPackage : mPackagesById.values()) {
+            if (resPackage.getResSpecCount() > value && !resPackage.getName().equalsIgnoreCase("android")) {
                 value = resPackage.getResSpecCount();
                 id = resPackage.getId();
             }
@@ -123,18 +124,14 @@ public class ResTable {
         return mPackagesByName.containsKey(name);
     }
 
-    public ResValue getValue(String package_, String type, String name)
-            throws AndrolibException {
-        return getPackage(package_).getType(type).getResSpec(name)
-                .getDefaultResource().getValue();
+    public ResValue getValue(String package_, String type, String name) throws AndrolibException {
+        return getPackage(package_).getType(type).getResSpec(name).getDefaultResource().getValue();
     }
 
-    public void addPackage(ResPackage pkg, boolean main)
-            throws AndrolibException {
+    public void addPackage(ResPackage pkg, boolean main) throws AndrolibException {
         Integer id = pkg.getId();
         if (mPackagesById.containsKey(id)) {
-            throw new AndrolibException("Multiple packages: id="
-                    + id.toString());
+            throw new AndrolibException("Multiple packages: id=" + id.toString());
         }
         String name = pkg.getName();
         if (mPackagesByName.containsKey(name)) {
@@ -178,11 +175,15 @@ public class ResTable {
         mSdkInfo.put(key, value);
     }
 
-    public void addVersionInfo(String key, String value) {
-        mVersionInfo.put(key, value);
+    public void setVersionName(String versionName) {
+        mVersionInfo.versionName = versionName;
     }
 
-    public Map<String, String> getVersionInfo() {
+    public void setVersionCode(String versionCode) {
+        mVersionInfo.versionCode = versionCode;
+    }
+
+    public VersionInfo getVersionInfo() {
         return mVersionInfo;
     }
 
