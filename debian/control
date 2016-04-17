@@ -10,20 +10,20 @@ Build-Depends:
  default-jdk,
  gradle-debian-helper,
  jflex,
+ junit4,
  libantlr3-runtime-java,
- libstringtemplate-java,
  libcommons-cli-java,
  libcommons-io-java,
  libcommons-lang3-java,
+ libgradle-jflex-plugin-java,
  libguava-java,
  libjgit-java,
  libjsr305-java,
+ libstringtemplate-java,
  libxmlunit-java,
  libxpp3-java,
  libyaml-snake-java,
- libgradle-jflex-plugin-java,
- proguard,
- junit4
+ proguard
 Standards-Version: 3.9.8
 Homepage: https://ibotpeaches.github.io/Apktool/
 Vcs-Git: https://anonscm.debian.org/git/android-tools/apktool.git
@@ -33,16 +33,17 @@ Package: apktool
 Architecture: all
 Depends:
  aapt,
- libyaml-snake-java,
+ default-jre-headless | java7-runtime-headless,
  libantlr3-runtime-java,
- libstringtemplate-java,
- libguava-java,
  libcommons-cli-java,
  libcommons-io-java,
  libcommons-lang3-java,
+ libguava-java,
  libjsr305-java,
- libxpp3-java,
+ libstringtemplate-java,
  libxmlunit-java,
+ libxpp3-java,
+ libyaml-snake-java,
  ${misc:Depends}
 Description: tool for reverse engineering Android apk files
  A tool for reverse engineering 3rd party, closed, binary Android apps. It can
@@ -50,4 +51,3 @@ Description: tool for reverse engineering Android apk files
  modifications; it makes possible to debug smali code step by step. Also it
  makes working with an app easier because of project-like file structure and
  automation of some repetitive tasks like building apk.
-
