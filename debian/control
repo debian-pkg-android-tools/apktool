@@ -19,6 +19,7 @@ Build-Depends:
  libguava-java,
  libjgit-java,
  libjsr305-java,
+ libsmali-java,
  libstringtemplate-java,
  libxmlunit-java,
  libxpp3-java,
