@@ -8,3 +8,7 @@ usr/share/java/snakeyaml.jar usr/share/apktool/snakeyaml.jar
 usr/share/java/stringtemplate.jar usr/share/apktool/stringtemplate.jar
 usr/share/java/xmlunit.jar usr/share/apktool/xmlunit.jar
 usr/share/java/xpp3.jar usr/share/apktool/xpp3.jar
+usr/share/java/dexlib2.jar usr/share/apktool/dexlib2.jar
+usr/share/java/smali-util.jar usr/share/apktool/smali-util.jar
+usr/share/java/baksmali.jar usr/share/apktool/baksmali.jar
+usr/share/java/smali.jar usr/share/apktool/smali.jar
