@@ -41,6 +41,7 @@ Depends:
  libcommons-lang3-java,
  libguava-java,
  libjsr305-java,
+ libsmali-java,
  libstringtemplate-java,
  libxmlunit-java,
  libxpp3-java,
