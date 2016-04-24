@@ -1,8 +1,15 @@
-apktool (2.1.0+dfsg-1) UNRELEASED; urgency=medium
+apktool (2.1.0+dfsg-1) unstable; urgency=medium
 
-  * 
+  * Imported Upstream version 2.1.0+dfsg.
+  * Declare compliance with Debian Policy 3.9.8.
+  * Depend on default-jre-headless | java7-runtime-headless.
+  * Drop LittleEndianDataInputStream.java.patch. Fixed upstream.
+  * Refresh build.patch for new release.
+  * Update debian/copyright for new release.
+  * Add libsmali-java to Build-Depends and Depends.
+  * Symlink smali jars into apktool directory.
 
- -- Markus Koschany <apo@debian.org>  Sun, 17 Apr 2016 21:26:18 +0200
+ -- Markus Koschany <apo@debian.org>  Sun, 24 Apr 2016 09:11:16 +0200
 
 apktool (2.0.2+dfsg-2) unstable; urgency=medium
 
