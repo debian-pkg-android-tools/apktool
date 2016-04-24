@@ -1,7 +1,7 @@
 Source: apktool
 Section: devel
 Priority: optional
-Maintainer: Android tools Maintainer <android-tools-devel@lists.alioth.debian.org>
+Maintainer: Android Tools Maintainers <android-tools-devel@lists.alioth.debian.org>
 Uploaders:
  Markus Koschany <apo@debian.org>
 Build-Depends:
