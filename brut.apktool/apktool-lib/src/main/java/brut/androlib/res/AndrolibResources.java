@@ -346,6 +346,9 @@ final public class AndrolibResources {
         if (apkOptions.updateFiles) {
             cmd.add("-u");
         }
+        if (apkOptions.debugMode) { // inject debuggable="true" into manifest
+            cmd.add("--debug-mode");
+        }
         // force package id so that some frameworks build with correct id
         // disable if user adds own aapt (can't know if they have this feature)
         if (mPackageId != null && ! customAapt && ! mSharedLibrary) {
@@ -621,6 +624,23 @@ final public class AndrolibResources {
             entry.setCrc(crc.getValue());
             out.putNextEntry(entry);
             out.write(data);
+            out.closeEntry();
+            
+            //Write fake AndroidManifest.xml file to support original aapt
+            entry = zip.getEntry("AndroidManifest.xml");
+            if (entry != null) {
+                in = zip.getInputStream(entry);
+                byte[] manifest = IOUtils.toByteArray(in);
+                CRC32 manifestCrc = new CRC32();
+                manifestCrc.update(manifest);
+                entry.setSize(manifest.length);
+                entry.setCompressedSize(-1);
+                entry.setCrc(manifestCrc.getValue());
+                out.putNextEntry(entry);
+                out.write(manifest);
+                out.closeEntry();
+            }
+
             zip.close();
             LOGGER.info("Framework installed to: " + outFile);
         } catch (IOException ex) {
@@ -660,7 +680,7 @@ final public class AndrolibResources {
         }
     }
 
-    private File getFrameworkDir() throws AndrolibException {
+    public File getFrameworkDir() throws AndrolibException {
         if (mFrameworkDirectory != null) {
             return mFrameworkDirectory;
         }
@@ -770,7 +790,8 @@ final public class AndrolibResources {
     private boolean mSharedLibrary = false;
 
     private final static String[] IGNORED_PACKAGES = new String[] {
-            "android", "com.htc", "miui", "com.lge", "com.lge.internal", "yi", "com.miui.core", "flyme"};
+            "android", "com.htc", "miui", "com.lge", "com.lge.internal", "yi", "com.miui.core", "flyme",
+            "air.com.adobe.appentry" };
 
     private final static String[] ALLOWED_PACKAGES = new String[] {
             "com.miui" };
