@@ -15,6 +15,7 @@
  */
 package brut.androlib;
 
+import brut.androlib.meta.MetaInfo;
 import brut.androlib.res.util.ExtFile;
 import brut.common.BrutException;
 import brut.util.OS;
@@ -23,32 +24,21 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.logging.Logger;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author Connor Tumbleson <connor.tumbleson@gmail.com>
  */
-public class BuildAndDecodeJarTest {
+public class ReferenceVersionCodeTest {
 
     @BeforeClass
     public static void beforeClass() throws Exception, BrutException {
         TestUtils.cleanFrameworkFile();
         sTmpDir = new ExtFile(OS.createTempDirectory());
-        sTestOrigDir = new ExtFile(sTmpDir, "testjar-orig");
-        sTestNewDir = new ExtFile(sTmpDir, "testjar-new");
-        LOGGER.info("Unpacking testjar...");
-        TestUtils.copyResourceDir(BuildAndDecodeJarTest.class, "brut/apktool/testjar/", sTestOrigDir);
-
-        LOGGER.info("Building testjar.jar...");
-        File testJar = new File(sTmpDir, "testjar.jar");
-        new Androlib().build(sTestOrigDir, testJar);
-
-        LOGGER.info("Decoding testjar.jar...");
-        ApkDecoder apkDecoder = new ApkDecoder(testJar);
-        apkDecoder.setOutDir(sTestNewDir);
-        apkDecoder.decode();
+        TestUtils.copyResourceDir(LargeIntsInManifestTest.class, "brut/apktool/issue1234/", sTmpDir);
     }
 
     @AfterClass
@@ -57,13 +47,20 @@ public class BuildAndDecodeJarTest {
     }
 
     @Test
-    public void buildAndDecodeTest() throws BrutException {
-        assertTrue(sTestNewDir.isDirectory());
+    public void referenceBecomesLiteralTest() throws BrutException, IOException {
+        String apk = "issue1234.apk";
+
+        // decode issue1234.apk
+        ApkDecoder apkDecoder = new ApkDecoder(new File(sTmpDir + File.separator + apk));
+        ExtFile decodedApk = new ExtFile(sTmpDir + File.separator + apk + ".out");
+        apkDecoder.setOutDir(new File(sTmpDir + File.separator + apk + ".out"));
+        apkDecoder.decode();
+
+        MetaInfo metaInfo = new Androlib().readMetaFile(decodedApk);
+        assertEquals("v1.0.0", metaInfo.versionInfo.versionName);
     }
 
     private static ExtFile sTmpDir;
-    private static ExtFile sTestOrigDir;
-    private static ExtFile sTestNewDir;
 
     private final static Logger LOGGER = Logger.getLogger(BuildAndDecodeJarTest.class.getName());
 }
