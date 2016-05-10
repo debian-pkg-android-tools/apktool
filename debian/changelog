@@ -1,8 +1,8 @@
-apktool (2.1.1+dfsg-1) UNRELEASED; urgency=medium
+apktool (2.1.1+dfsg-1) unstable; urgency=medium
 
-  * 
+  * Imported Upstream version 2.1.1+dfsg.
 
- -- Markus Koschany <apo@debian.org>  Tue, 10 May 2016 02:25:48 +0200
+ -- Markus Koschany <apo@debian.org>  Tue, 10 May 2016 02:37:43 +0200
 
 apktool (2.1.0+dfsg-2) unstable; urgency=medium
 
