@@ -60,7 +60,7 @@ index e33e79c..ddb7641 100644
 \ No newline at end of file
 +tasks.getByPath(':release').dependsOn(proguard)
 diff --git a/build.gradle b/build.gradle
-index 0a434b4..6a97b19 100644
+index 135959a..358d183 100644
 --- a/build.gradle
 +++ b/build.gradle
 @@ -21,7 +21,7 @@ buildscript {

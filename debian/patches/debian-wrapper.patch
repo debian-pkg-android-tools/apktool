@@ -1,0 +1,66 @@
+From: Markus Koschany <apo@debian.org>
+Date: Sat, 21 May 2016 16:22:29 +0200
+Subject: debian wrapper
+
+---
+ scripts/linux/apktool | 24 ++++++------------------
+ 1 file changed, 6 insertions(+), 18 deletions(-)
+
+diff --git a/scripts/linux/apktool b/scripts/linux/apktool
+index 3d5acd7..8aff589 100755
+--- a/scripts/linux/apktool
++++ b/scripts/linux/apktool
+@@ -20,6 +20,9 @@
+ 
+ # Set up prog to be the path of this script, including following symlinks,
+ # and set up progdir to be the fully-qualified pathname of its directory.
++
++APP_HOME="/usr/share/apktool"
++
+ prog="$0"
+ while [ -h "${prog}" ]; do
+     newProg=`/bin/ls -ld "${prog}"`
+@@ -35,25 +38,16 @@ done
+ oldwd=`pwd`
+ progdir=`dirname "${prog}"`
+ cd "${progdir}"
+-progdir=`pwd`
++progdir="/usr/share/apktool"
+ prog="${progdir}"/`basename "${prog}"`
+ cd "${oldwd}"
+ 
+-jarfile=apktool.jar
+-libdir="$progdir"
+-if [ ! -r "$libdir/$jarfile" ]
+-then
+-    echo `basename "$prog"`": can't find $jarfile"
+-    exit 1
+-fi
+-
+ javaOpts=""
+ 
+ # If you want DX to have more memory when executing, uncomment the following
+ # line and adjust the value accordingly. Use "java -X" for a list of options
+ # you can pass here.
+-# 
+-javaOpts="-Xmx512M"
++javaOpts="-Xmx512M -Dfile.encoding=utf-8"
+ 
+ # Alternatively, this will extract any parameter "-Jxxx" from the command line
+ # and pass them to Java (instead of to dx). This makes it possible for you to
+@@ -65,13 +59,7 @@ while expr "x$1" : 'x-J' >/dev/null; do
+     shift
+ done
+ 
+-if [ "$OSTYPE" = "cygwin" ] ; then
+-	jarpath=`cygpath -w  "$libdir/$jarfile"`
+-else
+-	jarpath="$libdir/$jarfile"
+-fi
+-
+ # add current location to path for aapt
+ PATH=$PATH:`pwd`;
+ export PATH;
+-exec java $javaOpts -jar "$jarpath" "$@"
+\ No newline at end of file
++exec java $javaOpts -cp "/usr/share/apktool/*" brut.apktool.Main "$@"
