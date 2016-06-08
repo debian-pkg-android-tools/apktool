@@ -1,0 +1,27 @@
+From: Chirayu Desai <chirayudesai1@gmail.com>
+Date: Wed, 8 Jun 2016 16:34:15 +0530
+Subject: Use $HOME/.local/share for framework files
+
+* Avoid polluting the home dir (~/apktool)
+
+Bug: 824930
+---
+ .../apktool-lib/src/main/java/brut/androlib/res/AndrolibResources.java  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/brut.apktool/apktool-lib/src/main/java/brut/androlib/res/AndrolibResources.java b/brut.apktool/apktool-lib/src/main/java/brut/androlib/res/AndrolibResources.java
+index 0175f3420a..b799c97110 100644
+--- a/brut.apktool/apktool-lib/src/main/java/brut/androlib/res/AndrolibResources.java
++++ b/brut.apktool/apktool-lib/src/main/java/brut/androlib/res/AndrolibResources.java
+@@ -691,7 +691,7 @@ final public class AndrolibResources {
+         if (apkOptions.frameworkFolderLocation != null) {
+             path = apkOptions.frameworkFolderLocation;
+         } else {
+-            File parentPath = new File(System.getProperty("user.home"));
++            File parentPath = new File(System.getProperty("user.home") + File.separator + ".local" + File.separator + "share");
+             if (! parentPath.canWrite()) {
+                 LOGGER.severe(String.format("WARNING: Could not write to $HOME (%s), using %s instead...",
+                         parentPath.getAbsolutePath(), System.getProperty("java.io.tmpdir")));
+-- 
+2.8.1
+
