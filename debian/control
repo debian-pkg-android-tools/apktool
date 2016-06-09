@@ -34,6 +34,7 @@ Package: apktool
 Architecture: all
 Depends:
  aapt,
+ android-framework-res,
  default-jre-headless | java7-runtime-headless,
  libantlr3-runtime-java,
  libcommons-cli-java,
