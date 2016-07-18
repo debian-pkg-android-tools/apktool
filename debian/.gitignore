@@ -1,0 +1,6 @@
+.debhelper/
+*.log
+*.substvars
+apktool/
+debhelper-build-stamp
+files
