@@ -9,7 +9,7 @@ Subject: Read first framework directly from the filesystem
  1 file changed, 3 insertions(+), 7 deletions(-)
 
 diff --git a/brut.apktool/apktool-lib/src/main/java/brut/androlib/res/AndrolibResources.java b/brut.apktool/apktool-lib/src/main/java/brut/androlib/res/AndrolibResources.java
-index 0175f3420a..c909fd3ae6 100644
+index 0175f34..7fc9b41 100644
 --- a/brut.apktool/apktool-lib/src/main/java/brut/androlib/res/AndrolibResources.java
 +++ b/brut.apktool/apktool-lib/src/main/java/brut/androlib/res/AndrolibResources.java
 @@ -576,7 +576,7 @@ final public class AndrolibResources {
@@ -36,6 +36,3 @@ index 0175f3420a..c909fd3ae6 100644
      }
  
      public ApkOptions apkOptions;
--- 
-2.8.1
-

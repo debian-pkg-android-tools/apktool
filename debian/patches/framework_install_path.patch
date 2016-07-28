@@ -10,7 +10,7 @@ Bug: 824930
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/brut.apktool/apktool-lib/src/main/java/brut/androlib/res/AndrolibResources.java b/brut.apktool/apktool-lib/src/main/java/brut/androlib/res/AndrolibResources.java
-index 0175f3420a..b799c97110 100644
+index 7fc9b41..1a6415e 100644
 --- a/brut.apktool/apktool-lib/src/main/java/brut/androlib/res/AndrolibResources.java
 +++ b/brut.apktool/apktool-lib/src/main/java/brut/androlib/res/AndrolibResources.java
 @@ -691,7 +691,7 @@ final public class AndrolibResources {
@@ -22,6 +22,3 @@ index 0175f3420a..b799c97110 100644
              if (! parentPath.canWrite()) {
                  LOGGER.severe(String.format("WARNING: Could not write to $HOME (%s), using %s instead...",
                          parentPath.getAbsolutePath(), System.getProperty("java.io.tmpdir")));
--- 
-2.8.1
-

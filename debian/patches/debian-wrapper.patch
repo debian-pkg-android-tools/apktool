@@ -3,24 +3,31 @@ Date: Sat, 21 May 2016 16:22:29 +0200
 Subject: debian wrapper
 
 ---
- scripts/linux/apktool | 24 ++++++------------------
- 1 file changed, 6 insertions(+), 18 deletions(-)
+ scripts/linux/apktool | 31 +++++++++++++------------------
+ 1 file changed, 13 insertions(+), 18 deletions(-)
 
 diff --git a/scripts/linux/apktool b/scripts/linux/apktool
-index 3d5acd7..8aff589 100755
+index 3d5acd7..827e580 100755
 --- a/scripts/linux/apktool
 +++ b/scripts/linux/apktool
-@@ -20,6 +20,9 @@
+@@ -20,6 +20,16 @@
  
  # Set up prog to be the path of this script, including following symlinks,
  # and set up progdir to be the fully-qualified pathname of its directory.
++
++WORKING_DIRECTORY=~/.local/share/apktool/framework/
++
++if [ ! -d ${WORKING_DIRECTORY} ]; then
++    mkdir -m 700 -p ${WORKING_DIRECTORY}
++    ln -s /usr/share/android-framework-res/framework-res.apk ${WORKING_DIRECTORY}/1.apk
++fi
 +
 +APP_HOME="/usr/share/apktool"
 +
  prog="$0"
  while [ -h "${prog}" ]; do
      newProg=`/bin/ls -ld "${prog}"`
-@@ -35,25 +38,16 @@ done
+@@ -35,25 +45,16 @@ done
  oldwd=`pwd`
  progdir=`dirname "${prog}"`
  cd "${progdir}"
@@ -48,7 +55,7 @@ index 3d5acd7..8aff589 100755
  
  # Alternatively, this will extract any parameter "-Jxxx" from the command line
  # and pass them to Java (instead of to dx). This makes it possible for you to
-@@ -65,13 +59,7 @@ while expr "x$1" : 'x-J' >/dev/null; do
+@@ -65,13 +66,7 @@ while expr "x$1" : 'x-J' >/dev/null; do
      shift
  done
  
