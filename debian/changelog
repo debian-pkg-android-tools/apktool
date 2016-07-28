@@ -4,6 +4,7 @@ apktool (2.1.1+dfsg-3) unstable; urgency=medium
     /usr/share/android-framework-res/framework-res.apk to
     ~/.local/share/apktool/framework/1.apk on first start if it does not exist.
     This will avoid unnecessarily filling up disk space. (Closes: #827646)
+  * Tighten dependency on libsmali-java.
 
  -- Markus Koschany <apo@debian.org>  Thu, 28 Jul 2016 06:58:56 +0200
 
