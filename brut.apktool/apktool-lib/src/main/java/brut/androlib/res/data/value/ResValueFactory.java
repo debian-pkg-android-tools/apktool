@@ -36,6 +36,8 @@ public class ResValueFactory {
             case TypedValue.TYPE_NULL:
                 if (value == TypedValue.DATA_NULL_UNDEFINED) { // Special case $empty as explicitly defined empty value
                     return new ResStringValue(null, value);
+                } else if (value == TypedValue.DATA_NULL_EMPTY) {
+                    return new ResEmptyValue(value, rawValue, type);
                 }
                 return new ResReferenceValue(mPackage, 0, null);
             case TypedValue.TYPE_REFERENCE:
@@ -70,7 +72,7 @@ public class ResValueFactory {
         if (value.startsWith("res/")) {
             return new ResFileValue(value, rawValue);
         }
-        if (value.startsWith("r/")) { //AndroResGuard
+        if (value.startsWith("r/") || value.startsWith("R/")) { //AndroResGuard
             return new ResFileValue(value, rawValue);
         }
         return new ResStringValue(value, rawValue);

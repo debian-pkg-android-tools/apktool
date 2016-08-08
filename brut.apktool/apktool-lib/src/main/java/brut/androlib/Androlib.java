@@ -31,6 +31,7 @@ import brut.directory.*;
 import brut.util.BrutIO;
 import brut.util.OS;
 import java.io.*;
+import java.nio.file.Files;
 import java.util.*;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
@@ -39,7 +40,9 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * @author Ryszard Wiśniewski <brut.alll@gmail.com>
@@ -161,10 +164,16 @@ public class Androlib {
             for (String file : files) {
                 if (isAPKFileNames(file) && !NO_COMPRESS_PATTERN.matcher(file).find()) {
                     if (unk.getCompressionLevel(file) == 0) {
-                        ext = FilenameUtils.getExtension(file);
-                        if (ext.isEmpty()) {
+
+                        if (StringUtils.countMatches(file, ".") > 1) {
                             ext = file;
+                        } else {
+                            ext = FilenameUtils.getExtension(file);
+                            if (ext.isEmpty()) {
+                                ext = file;
+                            }
                         }
+
                         if (! uncompressedFilesOrExts.contains(ext)) {
                             uncompressedFilesOrExts.add(ext);
                         }
@@ -277,9 +286,24 @@ public class Androlib {
         new File(appDir, APK_DIRNAME).mkdirs();
         buildSources(appDir);
         buildNonDefaultSources(appDir);
-        ResXmlPatcher.fixingPublicAttrsInProviderAttributes(new File(appDir, "AndroidManifest.xml"));
-        buildResources(appDir, meta.usesFramework);
 
+        File manifest = new File(appDir, "AndroidManifest.xml");
+        File manifestOriginal = new File(appDir, "AndroidManifest.xml.orig");
+
+        if (manifest.isFile() && manifest.exists()) {
+            try {
+
+                if (manifestOriginal.exists()) {
+                    manifestOriginal.delete();
+                }
+                FileUtils.copyFile(manifest, manifestOriginal);
+                ResXmlPatcher.fixingPublicAttrsInProviderAttributes(manifest);
+            } catch (IOException ex) {
+                throw new AndrolibException(ex.getMessage());
+            }
+        }
+
+        buildResources(appDir, meta.usesFramework);
         buildLib(appDir);
         buildLibs(appDir);
         buildCopyOriginalFiles(appDir);
@@ -288,6 +312,18 @@ public class Androlib {
         // we must go after the Apk is built, and copy the files in via Zip
         // this is because Aapt won't add files it doesn't know (ex unknown files)
         buildUnknownFiles(appDir, outFile, meta);
+
+        // we copied the AndroidManifest.xml to AndroidManifest.xml.orig so we can edit it
+        // lets restore the unedited one, to not change the original
+        if (manifest.isFile() && manifest.exists()) {
+            try {
+                if (new File(appDir, "AndroidManifest.xml").delete()) {
+                    FileUtils.moveFile(manifestOriginal, manifest);
+                }
+            } catch (IOException ex) {
+                throw new AndrolibException(ex.getMessage());
+            }
+        }
     }
 
     public void buildSources(File appDir)
@@ -711,7 +747,8 @@ public class Androlib {
     private final static String[] APK_MANIFEST_FILENAMES = new String[] {
             "AndroidManifest.xml" };
     private final static String[] APK_STANDARD_ALL_FILENAMES = new String[] {
-            "classes.dex", "AndroidManifest.xml", "resources.arsc", "res", "r", "lib", "libs", "assets", "META-INF" };
+            "classes.dex", "AndroidManifest.xml", "resources.arsc", "res", "r", "R",
+            "lib", "libs", "assets", "META-INF" };
     // Taken from AOSP's frameworks/base/tools/aapt/Package.cpp
     private final static Pattern NO_COMPRESS_PATTERN = Pattern.compile("\\.(" +
             "jpg|jpeg|png|gif|wav|mp2|mp3|ogg|aac|mpg|mpeg|mid|midi|smf|jet|rtttl|imy|xmf|mp4|" +

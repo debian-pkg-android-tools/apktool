@@ -246,6 +246,9 @@ final public class AndrolibResources {
             if (in == null && inApk.containsDir("r")) {
                 in = inApk.getDir("r");
             }
+            if (in == null && inApk.containsDir("R")) {
+                in = inApk.getDir("R");
+            }
         } catch (DirectoryException ex) {
             throw new AndrolibException(ex);
         }
@@ -703,8 +706,10 @@ final public class AndrolibResources {
 
             if (OSDetection.isMacOSX()) {
                 path = parentPath.getAbsolutePath() + String.format("%1$sLibrary%1$sapktool%1$sframework", File.separatorChar);
+            } else if (OSDetection.isWindows()) {
+                path = parentPath.getAbsolutePath() + String.format("%1$sAppData%1$sLocal%1$sapktool%1$sframework", File.separatorChar);
             } else {
-                path = parentPath.getAbsolutePath() + String.format("%1$sapktool%1$sframework", File.separatorChar);
+                path = parentPath.getAbsolutePath() + String.format("%1$s.local%1$sshare%1$sapktool%1$sframework", File.separatorChar);
             }
         }
 
