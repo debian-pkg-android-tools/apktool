@@ -1,3 +1,18 @@
+apktool (2.2.0+dfsg-1) UNRELEASED; urgency=medium
+
+  * Team upload.
+
+  [ Markus Koschany ]
+  * Drop jflex and libgradle-jflex-plugin-java from Build-Depends.
+
+  [ Chirayu Desai ]
+  * Imported Upstream version 2.2.0+dfsg
+  * Drop framework install path patch
+  * maven: use debian version for apache commons-lang3
+  * Add debian gitignore file
+
+ -- Chirayu Desai <chirayudesai1@gmail.com>  Mon, 08 Aug 2016 18:21:27 +0530
+
 apktool (2.1.1+dfsg-3) unstable; urgency=medium
 
   * Update debian-wrapper.patch and symlink
