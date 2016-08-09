@@ -18,13 +18,6 @@ Copyright: 2002-2004 Extreme! Lab, Indiana University
 License: INDIANA
 Comment: copied from XPP (XML Pull Parser): http://www.extreme.indiana.edu/xgws/xsoap/xpp/
 
-Files: brut.apktool/apktool-lib/src/main/java/com/peterfranza/LittleEndianDataInputStream.java
-Copyright: none
-License: public-domain
- This file was granted to the public domain. Please use it however you wish.
-Comment:
- http://www.peterfranza.com/2008/09/26/little-endian-input-stream/#comment-2518
-
 Files: debian/*
 Copyright: 2016, Markus Koschany <apo@debian.org>
 License: Apache-2.0
