@@ -2,7 +2,7 @@
 export JAVA_HOME=/usr/lib/jvm/default-java
 
 %:
-	dh $@ --parallel --buildsystem=gradle
+	dh $@ --buildsystem=gradle
 
 override_dh_auto_build:
 	dh_auto_build -- -Dfile.encoding=UTF-8 assemble
