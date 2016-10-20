@@ -1,8 +1,9 @@
-apktool (2.2.1+dfsg-1) UNRELEASED; urgency=medium
+apktool (2.2.1+dfsg-1) unstable; urgency=medium
 
-  * Team upload.
+  * New upstream version 2.2.1+dfsg.
+  * Switch to compat level 10.
 
- -- Markus Koschany <apo@debian.org>  Thu, 20 Oct 2016 08:56:16 +0200
+ -- Markus Koschany <apo@debian.org>  Thu, 20 Oct 2016 09:17:38 +0200
 
 apktool (2.2.0+dfsg-1) unstable; urgency=medium
 
