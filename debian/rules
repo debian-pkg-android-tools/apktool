@@ -9,6 +9,7 @@ override_dh_auto_build:
 
 override_dh_install:
 	mkdir -p debian/apktool/usr/share/apktool
+	cp test
 	find . -name "*.jar" -exec mv {} debian/apktool/usr/share/apktool/ \;
 	dh_install
 
