@@ -1,3 +1,11 @@
+apktool (2.2.1+dfsg-2) unstable; urgency=medium
+
+  * Make the build reproducible by using the install file for all jar files
+    instead of the find command in debian/rules.
+    Thanks to Chris Lamb for the report. (Closes: #845475)
+
+ -- Markus Koschany <apo@debian.org>  Mon, 28 Nov 2016 16:36:32 +0100
+
 apktool (2.2.1+dfsg-1) unstable; urgency=medium
 
   * New upstream version 2.2.1+dfsg.
