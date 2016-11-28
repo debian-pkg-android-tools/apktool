@@ -1,1 +1,8 @@
-scripts/linux/apktool usr/bin
+scripts/linux/apktool                               usr/bin
+build/libs/*.jar                                    usr/share/apktool
+brut.apktool/build/libs/brut.apktool.jar            usr/share/apktool
+brut.apktool/apktool-lib/build/libs/apktool-lib.jar usr/share/apktool
+brut.apktool/apktool-cli/build/libs/apktool-cli.jar usr/share/apktool
+brut.j.dir/build/libs/brut.j.dir.jar                usr/share/apktool
+brut.j.util/build/libs/brut.j.util.jar              usr/share/apktool
+brut.j.common/build/libs/brut.j.common.jar          usr/share/apktool

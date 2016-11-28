@@ -8,10 +8,7 @@ override_dh_auto_build:
 	dh_auto_build -- -Dfile.encoding=UTF-8 assemble
 
 override_dh_install:
-	mkdir -p debian/apktool/usr/share/apktool
-	cp test
-	find . -name "*.jar" -exec mv {} debian/apktool/usr/share/apktool/ \;
-	dh_install
+	dh_install --fail-missing
 
 get-orig-source:
 	uscan --force-download --download-current-version --repack --compression xz
