@@ -16,7 +16,7 @@
 package brut.androlib;
 
 import brut.androlib.meta.MetaInfo;
-import brut.androlib.res.util.ExtFile;
+import brut.directory.ExtFile;
 import brut.common.BrutException;
 import brut.directory.FileDirectory;
 import brut.util.OS;
@@ -27,11 +27,13 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Logger;
 
+import brut.util.OSDetection;
 import org.custommonkey.xmlunit.*;
 import org.junit.*;
-import static org.junit.Assert.*;
 
-import org.junit.rules.ExpectedException;
+import static org.junit.Assert.*;
+import static org.junit.Assume.*;
+
 import org.xml.sax.SAXException;
 
 import javax.imageio.ImageIO;
@@ -374,6 +376,17 @@ public class BuildAndDecodeTest {
     }
 
     @Test
+    public void fileAssetTest() throws BrutException, IOException {
+        compareAssetsFolder("txt");
+    }
+
+    @Test
+    public void unicodeAssetTest() throws BrutException, IOException {
+        assumeTrue(! OSDetection.isWindows());
+        compareAssetsFolder("unicode-txt");
+    }
+
+    @Test
     public void multipleDexTest() throws BrutException, IOException {
         compareBinaryFolder("/smali_classes2", false);
     }
@@ -410,7 +423,7 @@ public class BuildAndDecodeTest {
 
         String location = tmp + path;
 
-        FileDirectory fileDirectory = new FileDirectory(sTestOrigDir + location);
+        FileDirectory fileDirectory = new FileDirectory(sTestOrigDir, location);
 
         Set<String> files = fileDirectory.getFiles(true);
         for (String filename : files) {
@@ -432,6 +445,10 @@ public class BuildAndDecodeTest {
 
     private void compareLibsFolder(String path) throws BrutException, IOException {
         compareBinaryFolder(File.separatorChar + path, false);
+    }
+
+    private void compareAssetsFolder(String path) throws BrutException, IOException {
+        compareBinaryFolder(File.separatorChar + "assets" + File.separatorChar + path, false);
     }
 
     private void compareValuesFiles(String path) throws BrutException {

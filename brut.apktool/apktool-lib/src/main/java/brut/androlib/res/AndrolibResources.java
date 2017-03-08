@@ -25,7 +25,7 @@ import brut.androlib.res.data.*;
 import brut.androlib.res.decoder.*;
 import brut.androlib.res.decoder.ARSCDecoder.ARSCData;
 import brut.androlib.res.decoder.ARSCDecoder.FlagsOffset;
-import brut.androlib.res.util.ExtFile;
+import brut.directory.ExtFile;
 import brut.androlib.res.util.ExtMXSerializer;
 import brut.androlib.res.util.ExtXmlSerializer;
 import brut.androlib.res.xml.ResValuesXmlSerializable;
@@ -390,6 +390,7 @@ final public class AndrolibResources {
             cmd.add("--version-name");
             cmd.add(mVersionName);
         }
+        cmd.add("--no-version-vectors");
         cmd.add("-F");
         cmd.add(apkFile.getAbsolutePath());
 
@@ -773,9 +774,17 @@ final public class AndrolibResources {
 
         try {
             if (OSDetection.isMacOSX()) {
-                aaptBinary = Jar.getResourceAsFile("/prebuilt/aapt/macosx/aapt");
+                if (OSDetection.is64Bit()) {
+                    aaptBinary = Jar.getResourceAsFile("/prebuilt/aapt/macosx/64/aapt");
+                } else {
+                    aaptBinary = Jar.getResourceAsFile("/prebuilt/aapt/macosx/32/aapt");
+                }
             } else if (OSDetection.isUnix()) {
-                aaptBinary = Jar.getResourceAsFile("/prebuilt/aapt/linux/aapt");
+                if (OSDetection.is64Bit()) {
+                    aaptBinary = Jar.getResourceAsFile("/prebuilt/aapt/linux/64/aapt");
+                } else {
+                    aaptBinary = Jar.getResourceAsFile("/prebuilt/aapt/linux/32/aapt");
+                }
             } else if (OSDetection.isWindows()) {
                 aaptBinary = Jar.getResourceAsFile("/prebuilt/aapt/windows/aapt.exe");
             } else {
