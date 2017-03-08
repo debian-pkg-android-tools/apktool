@@ -19,7 +19,7 @@ License: INDIANA
 Comment: copied from XPP (XML Pull Parser): http://www.extreme.indiana.edu/xgws/xsoap/xpp/
 
 Files: debian/*
-Copyright: 2016, Markus Koschany <apo@debian.org>
+Copyright: 2016-2017, Markus Koschany <apo@debian.org>
 License: Apache-2.0
 
 License: Apache-2.0
