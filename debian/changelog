@@ -1,3 +1,9 @@
+apktool (2.2.2+dfsg-1) experimental; urgency=medium
+
+  * New upstream version 2.2.2+dfsg.
+
+ -- Markus Koschany <apo@debian.org>  Wed, 08 Mar 2017 10:42:08 +0100
+
 apktool (2.2.1+dfsg-2) unstable; urgency=medium
 
   * Make the build reproducible by using the install file for all jar files
