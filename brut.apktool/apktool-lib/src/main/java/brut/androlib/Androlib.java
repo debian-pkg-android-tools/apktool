@@ -19,6 +19,7 @@ package brut.androlib;
 import brut.androlib.meta.MetaInfo;
 import brut.androlib.meta.UsesFramework;
 import brut.androlib.res.AndrolibResources;
+import brut.androlib.res.data.ResConfigFlags;
 import brut.androlib.res.data.ResPackage;
 import brut.androlib.res.data.ResTable;
 import brut.androlib.res.data.ResUnknownFiles;
@@ -279,7 +280,22 @@ public class Androlib {
         mAndRes.setSharedLibrary(meta.sharedLibrary);
 
         if (meta.sdkInfo != null && meta.sdkInfo.get("minSdkVersion") != null) {
-            mMinSdkVersion = Integer.parseInt(meta.sdkInfo.get("minSdkVersion"));
+            String minSdkVersion = meta.sdkInfo.get("minSdkVersion");
+
+            // Preview builds use short letter for API versions
+            switch (minSdkVersion) {
+                case "M":
+                    mMinSdkVersion = ResConfigFlags.SDK_MNC;
+                    break;
+                case "N":
+                    mMinSdkVersion = ResConfigFlags.SDK_NOUGAT;
+                    break;
+                case "O":
+                    mMinSdkVersion = ResConfigFlags.SDK_O;
+                    break;
+                default:
+                    mMinSdkVersion = Integer.parseInt(meta.sdkInfo.get("minSdkVersion"));
+            }
         }
 
         if (outFile == null) {
@@ -739,6 +755,10 @@ public class Androlib {
             files[i] = new File(dir, names[i]);
         }
         return files;
+    }
+
+    public void close() throws IOException {
+        mAndRes.close();
     }
 
     private final static Logger LOGGER = Logger.getLogger(Androlib.class.getName());
