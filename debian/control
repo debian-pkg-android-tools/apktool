@@ -22,7 +22,7 @@ Build-Depends:
  libxmlunit-java,
  libxpp3-java,
  libyaml-snake-java,
- proguard
+ proguard-cli
 Standards-Version: 3.9.8
 Homepage: https://ibotpeaches.github.io/Apktool/
 Vcs-Git: https://anonscm.debian.org/git/android-tools/apktool.git
