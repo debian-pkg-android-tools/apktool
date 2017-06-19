@@ -7,10 +7,10 @@ Subject: use_system_aapt
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/brut.apktool/apktool-lib/src/main/java/brut/androlib/ApkOptions.java b/brut.apktool/apktool-lib/src/main/java/brut/androlib/ApkOptions.java
-index df4774f..23be8d1 100644
+index b188d54..a751385 100644
 --- a/brut.apktool/apktool-lib/src/main/java/brut/androlib/ApkOptions.java
 +++ b/brut.apktool/apktool-lib/src/main/java/brut/androlib/ApkOptions.java
-@@ -29,5 +29,5 @@ public class ApkOptions {
+@@ -30,5 +30,5 @@ public class ApkOptions {
  
      public String frameworkFolderLocation = null;
      public String frameworkTag = null;

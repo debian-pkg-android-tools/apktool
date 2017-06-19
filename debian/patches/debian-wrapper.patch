@@ -7,7 +7,7 @@ Subject: debian wrapper
  1 file changed, 12 insertions(+), 17 deletions(-)
 
 diff --git a/scripts/linux/apktool b/scripts/linux/apktool
-index 3d5acd7d77..ec1ef0dbf4 100755
+index e99086b..827e580 100755
 --- a/scripts/linux/apktool
 +++ b/scripts/linux/apktool
 @@ -20,6 +20,16 @@
