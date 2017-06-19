@@ -1,3 +1,4 @@
 debian-wrapper.patch
 use_system_aapt.patch
 use_system_framework.patch
+build.patch

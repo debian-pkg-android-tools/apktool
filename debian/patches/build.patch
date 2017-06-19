@@ -1,0 +1,64 @@
+From: Markus Koschany <apo@debian.org>
+Date: Mon, 19 Jun 2017 15:50:57 +0200
+Subject: build
+
+---
+ brut.apktool/apktool-cli/build.gradle | 7 +++----
+ build.gradle                          | 5 +----
+ 2 files changed, 4 insertions(+), 8 deletions(-)
+
+diff --git a/brut.apktool/apktool-cli/build.gradle b/brut.apktool/apktool-cli/build.gradle
+index 6010661..f5b44cc 100644
+--- a/brut.apktool/apktool-cli/build.gradle
++++ b/brut.apktool/apktool-cli/build.gradle
+@@ -13,7 +13,6 @@
+  *  See the License for the specific language governing permissions and
+  *  limitations under the License.
+  */
+-apply plugin: 'com.github.johnrengelman.shadow'
+ 
+ dependencies {
+     compile depends.commons_cli
+@@ -40,10 +39,10 @@ task cleanOutputDirectory(type: Delete) {
+     delete fileTree(dir: jar.destinationDir.getPath(), exclude: "apktool-cli-all.jar")
+ }
+ 
+-task proguard(type: proguard.gradle.ProGuardTask, dependsOn: shadowJar) {
++task proguard(type: proguard.gradle.ProGuardTask) {
+     def outFile = jar.destinationDir.getPath() + '/' + "apktool" + '-' + project.apktool_version + '-small' + '.' + jar.extension
+ 
+-    injars shadowJar.archivePath
++    injars jar.archivePath
+     outjars outFile
+ 
+     libraryjars "${System.properties['java.home']}/lib/rt.jar"
+@@ -61,4 +60,4 @@ task proguard(type: proguard.gradle.ProGuardTask, dependsOn: shadowJar) {
+ }
+ 
+ proguard.dependsOn cleanOutputDirectory
+-tasks.getByPath(':release').dependsOn(proguard)
+\ No newline at end of file
++tasks.getByPath(':release').dependsOn(proguard)
+diff --git a/build.gradle b/build.gradle
+index e574267..829d260 100644
+--- a/build.gradle
++++ b/build.gradle
+@@ -20,9 +20,6 @@ buildscript {
+     tasks.withType(JavaCompile) {
+         options.encoding = "UTF-8"
+     }
+-    dependencies {
+-        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.4'
+-    }
+ }
+ 
+ apply from: 'gradle/functions.gradle'
+@@ -30,7 +27,7 @@ apply from: 'gradle/functions.gradle'
+ def apktoolversion_major = '2.2.3'
+ def apktoolversion_minor = '';
+ 
+-defaultTasks 'build', 'shadowJar', 'proguard'
++defaultTasks 'build', 'proguard'
+ 
+ allprojects {
+     apply plugin: 'java'
