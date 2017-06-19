@@ -13,7 +13,7 @@ Copyright: 2014,      Ryszard Wiśniewski <brut.alll@gmail.com>
            2014,      Connor Tumbleson <connor.tumbleson@gmail.com>
 License: Apache-2.0
 
-Files: brut.apktool/apktool-lib/src/main/java/org/xmlpull/mxp1_serializer/MXSerializer.java
+Files: brut.apktool/apktool-lib/src/main/java/org/xmlpull/renamed/MXSerializer.java
 Copyright: 2002-2004 Extreme! Lab, Indiana University
 License: INDIANA
 Comment: copied from XPP (XML Pull Parser): http://www.extreme.indiana.edu/xgws/xsoap/xpp/
