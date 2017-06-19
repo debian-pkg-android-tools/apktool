@@ -17,6 +17,7 @@
 package brut.directory;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URI;
 
 /**
@@ -52,6 +53,12 @@ public class ExtFile extends File {
             }
         }
         return mDirectory;
+    }
+
+    public void close() throws IOException {
+        if (mDirectory != null) {
+            mDirectory.close();
+        }
     }
 
     private Directory mDirectory;

@@ -187,8 +187,12 @@ public class Main {
         } catch (DirectoryException ex) {
             System.err.println("Could not modify internal dex files. Please ensure you have permission.");
             System.exit(1);
+        } finally {
+            try {
+                decoder.close();
+            } catch (IOException ignored) {}
         }
-
+        System.exit(0);
     }
 
     private static void cmdBuild(CommandLine cli) throws BrutException {
@@ -482,7 +486,7 @@ public class Main {
                         + "For smali/baksmali info, see: https://github.com/JesusFreke/smali");
     }
 
-    private static void setupLogging(Verbosity verbosity) {
+    private static void setupLogging(final Verbosity verbosity) {
         Logger logger = Logger.getLogger("");
         for (Handler handler : logger.getHandlers()) {
             logger.removeHandler(handler);
@@ -505,7 +509,13 @@ public class Main {
                     if (record.getLevel().intValue() >= Level.WARNING.intValue()) {
                         System.err.write(message.getBytes());
                     } else {
-                        System.out.write(message.getBytes());
+                        if (record.getLevel().intValue() >= Level.INFO.intValue()) {
+                            System.out.write(message.getBytes());
+                        } else {
+                            if (verbosity == Verbosity.VERBOSE) {
+                                System.out.write(message.getBytes());
+                            }
+                        }
                     }
                 } catch (Exception exception) {
                     reportError(null, exception, ErrorManager.FORMAT_FAILURE);
