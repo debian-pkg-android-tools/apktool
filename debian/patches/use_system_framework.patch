@@ -2,6 +2,8 @@ From: Markus Koschany <apo@debian.org>
 Date: Mon, 19 Jun 2017 15:33:23 +0200
 Subject: use_system_framework
 
+Rather than including a package provided apk in the jar,
+just read it directly from where it gets installed.
 ---
  .../src/main/java/brut/androlib/res/AndrolibResources.java     | 10 +++-------
  1 file changed, 3 insertions(+), 7 deletions(-)

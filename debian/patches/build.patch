@@ -2,6 +2,7 @@ From: Markus Koschany <apo@debian.org>
 Date: Mon, 19 Jun 2017 15:50:57 +0200
 Subject: build
 
+Don't build the fatJar.
 ---
  brut.apktool/apktool-cli/build.gradle | 7 +++----
  build.gradle                          | 5 +----
