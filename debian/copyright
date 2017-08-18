@@ -2,9 +2,9 @@ Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: apktool
 Source: https://github.com/iBotPeaches/Apktool
 Files-Excluded:
+ gradle*
  brut.apktool/apktool-lib/src/main/resources/prebuilt
  brut.apktool/apktool-lib/src/test/resources/brut/apktool/testapp/res/drawable-ldpi/data.jpg
- *.jar
 
 Files: *
 Copyright: 2014,      Ryszard Wiśniewski <brut.alll@gmail.com>
