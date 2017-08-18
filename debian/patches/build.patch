@@ -4,8 +4,8 @@ Subject: build
 
 ---
  brut.apktool/apktool-cli/build.gradle |  7 +++----
- build.gradle                          | 25 +------------------------
- 2 files changed, 4 insertions(+), 28 deletions(-)
+ build.gradle                          | 27 ++-------------------------
+ 2 files changed, 5 insertions(+), 29 deletions(-)
 
 diff --git a/brut.apktool/apktool-cli/build.gradle b/brut.apktool/apktool-cli/build.gradle
 index 6010661..f5b44cc 100644
@@ -40,7 +40,7 @@ index 6010661..f5b44cc 100644
 \ No newline at end of file
 +tasks.getByPath(':release').dependsOn(proguard)
 diff --git a/build.gradle b/build.gradle
-index 6b3e2f7..3a7f955 100644
+index 6b3e2f7..382fa68 100644
 --- a/build.gradle
 +++ b/build.gradle
 @@ -20,13 +20,6 @@ buildscript {
@@ -92,3 +92,12 @@ index 6b3e2f7..3a7f955 100644
  }
  
  if (!('release' in gradle.startParameter.taskNames)) {
+@@ -114,7 +91,7 @@ subprojects {
+                 guava: 'com.google.guava:guava:14.0',
+                 junit: 'junit:junit:4.12',
+                 proguard_gradle: 'net.sf.proguard:proguard-gradle:5.2.1',
+-                snakeyaml: 'org.yaml:snakeyaml:1.18:android',
++                snakeyaml: 'org.yaml:snakeyaml:1.18',
+                 smali: 'org.smali:smali:2.2.1',
+                 xmlpull: 'xpp3:xpp3:1.1.4c',
+                 xmlunit: 'xmlunit:xmlunit:1.3',
