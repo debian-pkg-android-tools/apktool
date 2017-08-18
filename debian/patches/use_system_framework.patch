@@ -9,7 +9,7 @@ just read it directly from where it gets installed.
  1 file changed, 3 insertions(+), 7 deletions(-)
 
 diff --git a/brut.apktool/apktool-lib/src/main/java/brut/androlib/res/AndrolibResources.java b/brut.apktool/apktool-lib/src/main/java/brut/androlib/res/AndrolibResources.java
-index 2b1ad0c..5c7d52f 100644
+index daa6711..8edce01 100644
 --- a/brut.apktool/apktool-lib/src/main/java/brut/androlib/res/AndrolibResources.java
 +++ b/brut.apktool/apktool-lib/src/main/java/brut/androlib/res/AndrolibResources.java
 @@ -588,7 +588,7 @@ final public class AndrolibResources {
