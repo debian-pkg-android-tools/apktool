@@ -1,6 +1,5 @@
 
 junit junit * s/.*/4.x/ * *
-com.google.code.findbugs jsr305 * s/.*/0.x/ * *
 org.yaml snakeyaml * s/.*/1.x/ * *
 org.apache.commons commons-lang3 * s/.*/debian/ * *
 org.antlr antlr * s/.*/3.x/ * *
