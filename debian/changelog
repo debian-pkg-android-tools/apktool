@@ -1,3 +1,11 @@
+apktool (2.2.4+dfsg-1) unstable; urgency=medium
+
+  * New upstream version 2.2.4+dfsg.
+  * get-orig-source: Remove --repack option.
+  * Declare compliance with Debian Policy 4.0.1.
+
+ -- Markus Koschany <apo@debian.org>  Fri, 18 Aug 2017 04:02:22 +0200
+
 apktool (2.2.3+dfsg-1) unstable; urgency=medium
 
   * Upload to unstable.
