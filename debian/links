@@ -3,7 +3,6 @@ usr/share/java/commons-cli.jar usr/share/apktool/commons-cli.jar
 usr/share/java/commons-io.jar usr/share/apktool/commons-io.jar
 usr/share/java/commons-lang3.jar usr/share/apktool/commons-lang3.jar
 usr/share/java/guava.jar usr/share/apktool/guava.jar
-usr/share/java/jsr305.jar usr/share/apktool/jsr305.jar
 usr/share/java/snakeyaml.jar usr/share/apktool/snakeyaml.jar
 usr/share/java/stringtemplate.jar usr/share/apktool/stringtemplate.jar
 usr/share/java/xmlunit.jar usr/share/apktool/xmlunit.jar
