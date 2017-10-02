@@ -1,0 +1,103 @@
+From: Markus Koschany <apo@debian.org>
+Date: Mon, 2 Oct 2017 23:07:26 +0200
+Subject: build
+
+---
+ brut.apktool/apktool-cli/build.gradle |  7 +++----
+ build.gradle                          | 27 ++-------------------------
+ 2 files changed, 5 insertions(+), 29 deletions(-)
+
+diff --git a/brut.apktool/apktool-cli/build.gradle b/brut.apktool/apktool-cli/build.gradle
+index 6010661..f5b44cc 100644
+--- a/brut.apktool/apktool-cli/build.gradle
++++ b/brut.apktool/apktool-cli/build.gradle
+@@ -13,7 +13,6 @@
+  *  See the License for the specific language governing permissions and
+  *  limitations under the License.
+  */
+-apply plugin: 'com.github.johnrengelman.shadow'
+ 
+ dependencies {
+     compile depends.commons_cli
+@@ -40,10 +39,10 @@ task cleanOutputDirectory(type: Delete) {
+     delete fileTree(dir: jar.destinationDir.getPath(), exclude: "apktool-cli-all.jar")
+ }
+ 
+-task proguard(type: proguard.gradle.ProGuardTask, dependsOn: shadowJar) {
++task proguard(type: proguard.gradle.ProGuardTask) {
+     def outFile = jar.destinationDir.getPath() + '/' + "apktool" + '-' + project.apktool_version + '-small' + '.' + jar.extension
+ 
+-    injars shadowJar.archivePath
++    injars jar.archivePath
+     outjars outFile
+ 
+     libraryjars "${System.properties['java.home']}/lib/rt.jar"
+@@ -61,4 +60,4 @@ task proguard(type: proguard.gradle.ProGuardTask, dependsOn: shadowJar) {
+ }
+ 
+ proguard.dependsOn cleanOutputDirectory
+-tasks.getByPath(':release').dependsOn(proguard)
+\ No newline at end of file
++tasks.getByPath(':release').dependsOn(proguard)
+diff --git a/build.gradle b/build.gradle
+index 3b909f6..1352f89 100644
+--- a/build.gradle
++++ b/build.gradle
+@@ -20,13 +20,6 @@ buildscript {
+     tasks.withType(JavaCompile) {
+         options.encoding = "UTF-8"
+     }
+-    dependencies {
+-        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.4'
+-    }
+-}
+-
+-plugins {
+-    id "com.github.hierynomus.license" version "0.14.0"
+ }
+ 
+ apply from: 'gradle/functions.gradle'
+@@ -34,33 +27,17 @@ apply from: 'gradle/functions.gradle'
+ def apktoolversion_major = '2.3.0'
+ def apktoolversion_minor = '';
+ 
+-defaultTasks 'build', 'shadowJar', 'proguard'
++defaultTasks 'build', 'proguard'
+ 
+ allprojects {
+     apply plugin: 'java'
+-    apply plugin: 'license'
+     sourceCompatibility = JavaVersion.VERSION_1_7
+     targetCompatibility = JavaVersion.VERSION_1_7
+ 
+-    license {
+-        header rootProject.file("brut.j.common/src/templates/apache2.0-header.txt")
+-        include "**/*.java"
+-        strictCheck true
+-
+-        ext.year = Calendar.getInstance().get(Calendar.YEAR)
+-        ext.brut = 'Ryszard Wiśniewski'
+-        ext.brutEmail = 'brut.alll@gmail.com'
+-        ext.ibot = 'Connor Tumbleson'
+-        ext.ibotEmail = 'connor.tumbleson@gmail.com'
+-    }
+-
+     tasks.withType(JavaCompile) {
+         options.compilerArgs += ["-Xlint:-options"]
+     }
+ 
+-    // license plugin automatically fires these tasks, disable them and run them during releases
+-    gradle.startParameter.excludedTaskNames += "licenseMain"
+-    gradle.startParameter.excludedTaskNames += "licenseTest"
+ }
+ 
+ if (!('release' in gradle.startParameter.taskNames)) {
+@@ -114,7 +91,7 @@ subprojects {
+                 guava: 'com.google.guava:guava:14.0',
+                 junit: 'junit:junit:4.12',
+                 proguard_gradle: 'net.sf.proguard:proguard-gradle:5.2.1',
+-                snakeyaml: 'org.yaml:snakeyaml:1.18:android',
++                snakeyaml: 'org.yaml:snakeyaml:1.18',
+                 smali: 'org.smali:smali:2.2.1',
+                 xmlpull: 'xpp3:xpp3:1.1.4c',
+                 xmlunit: 'xmlunit:xmlunit:1.3',
