@@ -307,6 +307,16 @@ final public class AndrolibResources {
         mSharedLibrary = flag;
     }
 
+    public String checkTargetSdkVersionBounds() {
+        int target = Integer.parseInt(mTargetSdkVersion);
+        int min = (mMinSdkVersion != null) ? Integer.parseInt(mMinSdkVersion) : 0;
+        int max = (mMaxSdkVersion != null) ? Integer.parseInt(mMaxSdkVersion) : target;
+
+        target = Math.min(max, target);
+        target = Math.max(min, target);
+        return Integer.toString(target);
+    }
+
     public void aaptPackage(File apkFile, File manifest, File resDir, File rawDir, File assetDir, File[] include)
             throws AndrolibException {
 
@@ -368,7 +378,10 @@ final public class AndrolibResources {
         }
         if (mTargetSdkVersion != null) {
             cmd.add("--target-sdk-version");
-            cmd.add(mTargetSdkVersion);
+
+            // Ensure that targetSdkVersion is between minSdkVersion/maxSdkVersion if
+            // they are specified.
+            cmd.add(checkTargetSdkVersionBounds());
         }
         if (mMaxSdkVersion != null) {
             cmd.add("--max-sdk-version");
@@ -730,14 +743,6 @@ final public class AndrolibResources {
             path = apkOptions.frameworkFolderLocation;
         } else {
             File parentPath = new File(System.getProperty("user.home"));
-            if (! parentPath.canWrite()) {
-                LOGGER.severe(String.format("WARNING: Could not write to $HOME (%s), using %s instead...",
-                        parentPath.getAbsolutePath(), System.getProperty("java.io.tmpdir")));
-                LOGGER.severe("Please be aware this is a volatile directory and frameworks could go missing, " +
-                        "please utilize --frame-path if the default storage directory is unavailable");
-
-                parentPath = new File(System.getProperty("java.io.tmpdir"));
-            }
 
             if (OSDetection.isMacOSX()) {
                 path = parentPath.getAbsolutePath() + String.format("%1$sLibrary%1$sapktool%1$sframework", File.separatorChar);
@@ -746,9 +751,25 @@ final public class AndrolibResources {
             } else {
                 path = parentPath.getAbsolutePath() + String.format("%1$s.local%1$sshare%1$sapktool%1$sframework", File.separatorChar);
             }
+
+            File fullPath = new File(path);
+
+            if (! fullPath.canWrite()) {
+                LOGGER.severe(String.format("WARNING: Could not write to (%1$s), using %2$s instead...",
+                        fullPath.getAbsolutePath(), System.getProperty("java.io.tmpdir")));
+                LOGGER.severe("Please be aware this is a volatile directory and frameworks could go missing, " +
+                        "please utilize --frame-path if the default storage directory is unavailable");
+
+                path = new File(System.getProperty("java.io.tmpdir")).getAbsolutePath();
+            }
         }
 
         File dir = new File(path);
+
+        if (!dir.isDirectory()) {
+            LOGGER.severe("--frame-path is set to a file, not a directory.");
+            System.exit(1);
+        }
 
         if (dir.getParentFile() != null && dir.getParentFile().isFile()) {
             LOGGER.severe("Please remove file at " + dir.getParentFile());
@@ -780,19 +801,15 @@ final public class AndrolibResources {
     public File getAaptBinaryFile() throws AndrolibException {
         File aaptBinary;
 
+        if (! OSDetection.is64Bit() && ! OSDetection.isWindows()) {
+            throw new AndrolibException("32 bit OS detected. No 32 bit binaries available.");
+        }
+
         try {
             if (OSDetection.isMacOSX()) {
-                if (OSDetection.is64Bit()) {
-                    aaptBinary = Jar.getResourceAsFile("/prebuilt/aapt/macosx/64/aapt", AndrolibResources.class);
-                } else {
-                    aaptBinary = Jar.getResourceAsFile("/prebuilt/aapt/macosx/32/aapt", AndrolibResources.class);
-                }
+                aaptBinary = Jar.getResourceAsFile("/prebuilt/aapt/macosx/aapt", AndrolibResources.class);
             } else if (OSDetection.isUnix()) {
-                if (OSDetection.is64Bit()) {
-                    aaptBinary = Jar.getResourceAsFile("/prebuilt/aapt/linux/64/aapt", AndrolibResources.class);
-                } else {
-                    aaptBinary = Jar.getResourceAsFile("/prebuilt/aapt/linux/32/aapt", AndrolibResources.class);
-                }
+                aaptBinary = Jar.getResourceAsFile("/prebuilt/aapt/linux/aapt", AndrolibResources.class);
             } else if (OSDetection.isWindows()) {
                 aaptBinary = Jar.getResourceAsFile("/prebuilt/aapt/windows/aapt.exe", AndrolibResources.class);
             } else {

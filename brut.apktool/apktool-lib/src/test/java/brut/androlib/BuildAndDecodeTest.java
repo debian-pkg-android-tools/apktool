@@ -205,8 +205,8 @@ public class BuildAndDecodeTest {
     @Test
     public void qualifiersTest() throws BrutException {
         compareValuesFiles("values-mcc004-mnc4-en-rUS-ldrtl-sw100dp-w200dp-h300dp"
-                + "-xlarge-long-round-land-desk-night-xhdpi-finger-keyssoft-12key"
-                + "-navhidden-dpad/strings.xml");
+                + "-xlarge-long-round-highdr-land-desk-night-xhdpi-finger-keyssoft-12key"
+                + "-navhidden-dpad-v26/strings.xml");
     }
 
     @Test
@@ -293,6 +293,23 @@ public class BuildAndDecodeTest {
     public void api23ConfigurationsTest() throws BrutException, IOException {
         compareValuesFiles("values-round/strings.xml");
         compareValuesFiles("values-notround/strings.xml");
+    }
+
+    @Test
+    public void api26ConfigurationsTest() throws BrutException, IOException {
+        compareValuesFiles("values-widecg-v26/strings.xml");
+        compareValuesFiles("values-lowdr-v26/strings.xml");
+        compareValuesFiles("values-nowidecg-v26/strings.xml");
+        compareValuesFiles("values-vrheadset-v26/strings.xml");
+    }
+
+    @Test
+    public void fontTest() throws BrutException, IOException {
+        File fontXml = new File((sTestNewDir + "/res/font"), "lobster.xml");
+        File fontFile = new File((sTestNewDir + "/res/font"), "lobster_regular.otf");
+
+        assertTrue(fontXml.isFile());
+        assertTrue(fontFile.isFile());
     }
 
     @Test

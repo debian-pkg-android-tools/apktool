@@ -137,13 +137,16 @@ public class Androlib {
         mAndRes.decodeManifestWithResources(resTable, apkFile, outDir);
     }
 
-    public void decodeRawFiles(ExtFile apkFile, File outDir)
+    public void decodeRawFiles(ExtFile apkFile, File outDir, short decodeAssetMode)
             throws AndrolibException {
         LOGGER.info("Copying assets and libs...");
         try {
             Directory in = apkFile.getDirectory();
-            if (in.containsDir("assets")) {
-                in.copyToDir(outDir, "assets");
+
+            if (decodeAssetMode == ApkDecoder.DECODE_ASSETS_FULL) {
+                if (in.containsDir("assets")) {
+                    in.copyToDir(outDir, "assets");
+                }
             }
             if (in.containsDir("lib")) {
                 in.copyToDir(outDir, "lib");
@@ -284,21 +287,7 @@ public class Androlib {
 
         if (meta.sdkInfo != null && meta.sdkInfo.get("minSdkVersion") != null) {
             String minSdkVersion = meta.sdkInfo.get("minSdkVersion");
-
-            // Preview builds use short letter for API versions
-            switch (minSdkVersion) {
-                case "M":
-                    mMinSdkVersion = ResConfigFlags.SDK_MNC;
-                    break;
-                case "N":
-                    mMinSdkVersion = ResConfigFlags.SDK_NOUGAT;
-                    break;
-                case "O":
-                    mMinSdkVersion = ResConfigFlags.SDK_O;
-                    break;
-                default:
-                    mMinSdkVersion = Integer.parseInt(meta.sdkInfo.get("minSdkVersion"));
-            }
+            mMinSdkVersion = getMinSdkVersionFromAndroidCodename(meta, minSdkVersion);
         }
 
         if (outFile == null) {
@@ -737,6 +726,19 @@ public class Androlib {
             files[i++] = mAndRes.getFrameworkApk(id, tag);
         }
         return files;
+    }
+
+    private int getMinSdkVersionFromAndroidCodename(MetaInfo meta, String sdkVersion) {
+        switch (sdkVersion) {
+            case "M":
+                return ResConfigFlags.SDK_MNC;
+            case "N":
+                return ResConfigFlags.SDK_NOUGAT;
+            case "O":
+                return ResConfigFlags.SDK_OREO;
+            default:
+                return Integer.parseInt(meta.sdkInfo.get("minSdkVersion"));
+        }
     }
 
     private boolean isModified(File working, File stored) {
