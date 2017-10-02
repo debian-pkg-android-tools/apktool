@@ -1,3 +1,10 @@
+apktool (2.3.0+dfsg-1) unstable; urgency=medium
+
+  * New upstream version 2.3.0+dfsg.
+  * Declare compliance with Debian Policy 4.1.1.
+
+ -- Markus Koschany <apo@debian.org>  Mon, 02 Oct 2017 23:02:51 +0200
+
 apktool (2.2.4+dfsg-1) unstable; urgency=medium
 
   * New upstream version 2.2.4+dfsg.
