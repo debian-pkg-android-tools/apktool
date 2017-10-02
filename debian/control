@@ -22,7 +22,7 @@ Build-Depends:
  libxpp3-java,
  libyaml-snake-java,
  proguard-cli
-Standards-Version: 4.0.1
+Standards-Version: 4.1.1
 Homepage: https://ibotpeaches.github.io/Apktool/
 Vcs-Git: https://anonscm.debian.org/git/android-tools/apktool.git
 Vcs-Browser: https://anonscm.debian.org/cgit/android-tools/apktool.git
