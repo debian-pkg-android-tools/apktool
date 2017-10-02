@@ -192,7 +192,8 @@ public class ARSCDecoder {
             mTypeSpec = mResTypeSpecs.get(typeId);
         }
 
-        /* res0, res1 */mIn.skipBytes(3);
+        int typeFlags = mIn.readByte();
+        /* reserved */mIn.skipBytes(2);
         int entryCount = mIn.readInt();
         int entriesStart = mIn.readInt();
         mMissingResSpecs = new boolean[entryCount];
@@ -205,6 +206,10 @@ public class ARSCDecoder {
         // If we find a mismatch skip those bytes.
         if (position != mCountIn.getCount()) {
             mIn.skipBytes(position - mCountIn.getCount());
+        }
+
+        if (typeFlags == 1) {
+            LOGGER.info("Sparse type flags detected: " + mTypeSpec.getName());
         }
         int[] entryOffsets = mIn.readIntArray(entryCount);
 
@@ -381,9 +386,11 @@ public class ARSCDecoder {
         }
 
         byte screenLayout2 = 0;
+        byte colorMode = 0;
         if (size >= 52) {
             screenLayout2 = mIn.readByte();
-            mIn.skipBytes(3); // reserved padding
+            colorMode = mIn.readByte();
+            mIn.skipBytes(2); // reserved padding
             read = 52;
         }
 
@@ -419,7 +426,8 @@ public class ARSCDecoder {
                 orientation, touchscreen, density, keyboard, navigation,
                 inputFlags, screenWidth, screenHeight, sdkVersion,
                 screenLayout, uiMode, smallestScreenWidthDp, screenWidthDp,
-                screenHeightDp, localeScript, localeVariant, screenLayout2, isInvalid, size);
+                screenHeightDp, localeScript, localeVariant, screenLayout2,
+                colorMode, isInvalid, size);
     }
 
     private char[] unpackLanguageOrRegion(byte in0, byte in1, char base) throws AndrolibException {
