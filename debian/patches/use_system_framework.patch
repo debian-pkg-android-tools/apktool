@@ -9,10 +9,10 @@ just read it directly from where it gets installed.
  1 file changed, 3 insertions(+), 7 deletions(-)
 
 diff --git a/brut.apktool/apktool-lib/src/main/java/brut/androlib/res/AndrolibResources.java b/brut.apktool/apktool-lib/src/main/java/brut/androlib/res/AndrolibResources.java
-index 79e55f5..8608aff 100644
+index 76aea94..87e3de6 100644
 --- a/brut.apktool/apktool-lib/src/main/java/brut/androlib/res/AndrolibResources.java
 +++ b/brut.apktool/apktool-lib/src/main/java/brut/androlib/res/AndrolibResources.java
-@@ -601,7 +601,7 @@ final public class AndrolibResources {
+@@ -625,7 +625,7 @@ final public class AndrolibResources {
          }
  
          if (id == 1) {
@@ -21,7 +21,7 @@ index 79e55f5..8608aff 100644
                   OutputStream out = new FileOutputStream(apk)) {
                  IOUtils.copy(in, out);
                  return apk;
-@@ -827,12 +827,8 @@ final public class AndrolibResources {
+@@ -849,12 +849,8 @@ final public class AndrolibResources {
          throw new AndrolibException("Can't set aapt binary as executable");
      }
  
