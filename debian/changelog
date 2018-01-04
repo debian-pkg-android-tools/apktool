@@ -1,3 +1,9 @@
+apktool (2.3.1+dfsg-1) UNRELEASED; urgency=medium
+
+  * 
+
+ -- Markus Koschany <apo@debian.org>  Thu, 04 Jan 2018 22:18:32 +0100
+
 apktool (2.3.0+dfsg-1) unstable; urgency=medium
 
   * New upstream version 2.3.0+dfsg.
